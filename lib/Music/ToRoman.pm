@@ -14,6 +14,7 @@ use Music::Scales;
 =head1 SYNOPSIS
 
   use Music::ToRoman;
+
   my $mtr = Music::ToRoman->new(
     scale_note => 'A',
     scale_name => 'minor',
@@ -24,6 +25,16 @@ use Music::Scales;
   $roman = $mtr->parse('Em7');   # v7 (minor seventh)
   $roman = $mtr->parse('A+');    # I+ (augmented)
   $roman = $mtr->parse('BbM');   # bII (flat-two major)
+
+  # Also:
+  my $mtr = Music::ToRoman->new(
+    scale_note => 'A',
+    scale_name => 'minor',
+    chords     => 0,
+  );
+  $roman = $mtr->parse('A'); # i
+  $roman = $mtr->parse('B'); # ii
+  $roman = $mtr->parse('C'); # III
 
 =head1 DESCRIPTION
 
@@ -89,7 +100,10 @@ Parse a given chord name into a Roman numeral representation.
 sub parse {
     my ( $self, $chord ) = @_;
 
-    my @roman = qw( I ii iii IV V vi vii );
+    # XXX Assume minor if not major!
+    my @roman = $self->scale_name eq 'major'
+        ? qw( I ii iii IV V vi vii )
+        : qw( i ii III iv v VI VII );
 
     # Get the scale notes
     my @notes = get_scale_notes( $self->scale_note, $self->scale_name );
