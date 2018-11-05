@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert chords to Roman numeral notation
 
-our $VERSION = '0.0100';
+our $VERSION = '0.0101';
 
 use Moo;
 use strictures 2;
@@ -33,7 +33,7 @@ C<Music::ToRoman> converts chords to Roman numeral notation.
 
 =head2 scale_note
 
-Note on which the scale is based.
+Note on which the scale is based.  This can be one of C, D, E, F, G, A or B.
 
 Default: C
 
@@ -46,7 +46,7 @@ has scale_note => (
 
 =head2 scale_name
 
-Name of the scale.
+Name of the scale.  See L<Music::Scales/SCALES> for the possible names.
 
 Default: major
 
@@ -131,7 +131,7 @@ L<Moo>
 
 L<List::MoreUtils>
 
-L<use Music::Scales>
+L<Music::Scales>
 
 L<https://en.wikipedia.org/wiki/Roman_numeral_analysis>
 

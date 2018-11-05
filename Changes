@@ -1,6 +1,8 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Improved documentation.
+    - Added a test!
 
 0.0100 2018-11-04 20:07:56
     - Minted by Dist::Zilla.
