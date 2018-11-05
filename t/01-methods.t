@@ -18,11 +18,8 @@ $roman = $mtr->parse('Bo');
 is $roman, 'iio', 'iio';
 $roman = $mtr->parse('CM');
 is $roman, 'III', 'III';
-SKIP: {
-    skip 'note in bass not yet implemented', 1;
-    $roman = $mtr->parse('Cm9/G');
-    is $roman, 'iii9/vii', 'iii9/vii';
-}
+$roman = $mtr->parse('Cm9/G');
+is $roman, 'iii9/vii', 'iii9/vii';
 $roman = $mtr->parse('Em7');
 is $roman, 'v7', 'v7';
 $roman = $mtr->parse('A+');

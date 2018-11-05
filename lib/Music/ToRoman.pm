@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert chords to Roman numeral notation
 
-our $VERSION = '0.0101';
+our $VERSION = '0.0200';
 
 use Moo;
 use strictures 2;
@@ -115,6 +115,12 @@ sub parse {
 
     # Drop the minor and major part of the chord name
     $decorator =~ s/M//i;
+
+    if ( $decorator =~ /([A-G])/ ) {
+        my $letter = $1;
+        $position = first_index { $_ eq $letter } @notes;
+        $decorator =~ s/[A-G]/$roman[$position]/;
+    }
 
     # Append the remaining decorator to the roman representation
     $roman .= $decorator;

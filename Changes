@@ -1,6 +1,9 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Allowed chords with notes in the bass (e.g. "Cm9/G").
+
+0.0101 2018-11-04 20:27:14
     - Improved documentation.
     - Added a test!
 
