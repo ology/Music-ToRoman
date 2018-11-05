@@ -1,6 +1,7 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Allowed user specification to use chords (lc/uc) or not.
 
 0.0200 2018-11-04 21:06:31
     - Allowed chords with notes in the bass (e.g. "Cm9/G").

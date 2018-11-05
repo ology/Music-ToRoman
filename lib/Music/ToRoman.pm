@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert chords to Roman numeral notation
 
-our $VERSION = '0.0200';
+our $VERSION = '0.0300';
 
 use Moo;
 use strictures 2;
@@ -57,6 +57,19 @@ has scale_name => (
     default => sub { 'major' },
 );
 
+=head2 chords
+
+Are we given chords with major ("M") and minor ("m") designations?
+
+Default: 1
+
+=cut
+
+has chords => (
+    is      => 'ro',
+    default => sub { 1 },
+);
+
 =head1 METHODS
 
 =head2 new()
@@ -108,7 +121,9 @@ sub parse {
     my $minor = $decorator =~ /[mo]/ ? 1 : 0;
 
     # Convert the case of the roman representation based on minor or major
-    $roman = $minor ? lc($roman) : uc($roman);
+    if ( $self->chords ) {
+        $roman = $minor ? lc($roman) : uc($roman);
+    }
 
     # Add any accidental found in a non-scale note
     $roman = $accidental . $roman if $accidental;
