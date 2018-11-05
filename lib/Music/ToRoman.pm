@@ -27,7 +27,7 @@ use Music::Scales;
   $roman = $mtr->parse('BbM');   # bII (flat-two major)
 
   # Also:
-  my $mtr = Music::ToRoman->new(
+  $mtr = Music::ToRoman->new(
     scale_note => 'A',
     scale_name => 'minor',
     chords     => 0,
