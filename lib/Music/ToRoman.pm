@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert chords to Roman numeral notation
 
-our $VERSION = '0.0300';
+our $VERSION = '0.0301';
 
 use Moo;
 use strictures 2;
@@ -73,6 +73,9 @@ has scale_name => (
 Are we given chords with major ("M") and minor ("m") designations?
 
 Default: 1
+
+If this is set to 0, then only either major or minor B<scale_name> output is
+rendered (other modes and scales are ignored).
 
 =cut
 
