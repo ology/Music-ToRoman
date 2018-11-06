@@ -31,7 +31,7 @@ is $roman, 'ii add4', 'ii add4';
 
 $mtr = Music::ToRoman->new(
     scale_note => 'A',
-    scale_name => 'minor',
+    scale_name => 'dorian',
     chords     => 0,
 );
 $roman = $mtr->parse('A');
@@ -40,5 +40,13 @@ $roman = $mtr->parse('B');
 is $roman, 'ii', 'ii';
 $roman = $mtr->parse('C');
 is $roman, 'III', 'III';
+$roman = $mtr->parse('D');
+is $roman, 'IV', 'IV';
+$roman = $mtr->parse('E');
+is $roman, 'v', 'v';
+$roman = $mtr->parse('F#');
+is $roman, 'vi', 'vi';
+$roman = $mtr->parse('G');
+is $roman, 'VII', 'VII';
 
 done_testing();

@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert chords to Roman numeral notation
 
-our $VERSION = '0.0301';
+our $VERSION = '0.0400';
 
 use Moo;
 use strictures 2;
@@ -29,7 +29,7 @@ use Music::Scales;
   # Also:
   $mtr = Music::ToRoman->new(
     scale_note => 'A',
-    scale_name => 'minor',
+    scale_name => 'dorian',
     chords     => 0,
   );
   $roman = $mtr->parse('A'); # i
@@ -38,13 +38,14 @@ use Music::Scales;
 
 =head1 DESCRIPTION
 
-C<Music::ToRoman> converts chords to Roman numeral notation.
+C<Music::ToRoman> converts chords to Roman numeral notation.  Also individual
+"chordless" notes may be converted given a diatonic mode B<scale_name>.
 
 =head1 ATTRIBUTES
 
 =head2 scale_note
 
-Note on which the scale is based.  This can be one of C, D, E, F, G, A or B.
+Note on which the scale is based.  This can be one of C, Cb, C#, D, Db, D# ...
 
 Default: C
 
@@ -57,7 +58,15 @@ has scale_note => (
 
 =head2 scale_name
 
-Name of the scale.  See L<Music::Scales/SCALES> for the possible names.
+Name of the scale.  The diatonic mode names supported are:
+
+  ionian / major
+  dorian
+  phrygian
+  lydian
+  mixolydian
+  aeolian / minor
+  locrian
 
 Default: major
 
@@ -74,8 +83,8 @@ Are we given chords with major ("M") and minor ("m") designations?
 
 Default: 1
 
-If this is set to 0, then only either major or minor B<scale_name> output is
-rendered (other modes and scales are ignored).
+If this is set to 0, then only diatonic mode B<scale_name> output is rendered
+(other scales are ignored).
 
 =cut
 
@@ -103,10 +112,29 @@ Parse a given chord name into a Roman numeral representation.
 sub parse {
     my ( $self, $chord ) = @_;
 
-    # XXX Assume minor if not major!
-    my @roman = $self->scale_name eq 'major'
-        ? qw( I ii iii IV V vi vii )
-        : qw( i ii III iv v VI VII );
+    # Literal diatonic modes when chords attribute is zero
+    my @roman;
+    if ( $self->scale_name eq 'major' || $self->scale_name eq 'ionian' ) {
+        @roman = qw( I ii iii IV V vi vii );
+    }
+    elsif ( $self->scale_name eq 'dorian' ) {
+        @roman = qw( i ii III IV v vi VII );
+    }
+    elsif ( $self->scale_name eq 'phrygian' ) {
+        @roman = qw( i II III iv v VI vii );
+    }
+    elsif ( $self->scale_name eq 'lydian' ) {
+        @roman = qw( I II iii iv V vi vii );
+    }
+    elsif ( $self->scale_name eq 'mixolydian' ) {
+        @roman = qw( I ii iii IV v vi VII );
+    }
+    elsif ( $self->scale_name eq 'minor' || $self->scale_name eq 'aeolian' ) {
+        @roman = qw( i ii III iv v VI VII );
+    }
+    elsif ( $self->scale_name eq 'locrian' ) {
+        @roman = qw( i II iii iv V VI vii );
+    }
 
     # Get the scale notes
     my @notes = get_scale_notes( $self->scale_note, $self->scale_name );
