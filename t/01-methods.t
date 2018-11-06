@@ -31,8 +31,8 @@ $roman = $mtr->parse('A+');
 is $roman, 'I+', 'I+';
 $roman = $mtr->parse('BbM');
 is $roman, 'bII', 'bII';
-$roman = $mtr->parse('Bm add4');
-is $roman, 'ii add4', 'ii add4';
+$roman = $mtr->parse('Bm sus4');
+is $roman, 'ii sus4', 'ii sus4';
 
 $mtr = Music::ToRoman->new(
     scale_note => 'A',
