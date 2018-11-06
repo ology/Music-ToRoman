@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0500';
+our $VERSION = '0.0501';
 
 use Moo;
 use strictures 2;
@@ -25,6 +25,7 @@ use Music::Scales;
   $roman = $mtr->parse('Em7');   # v7 (minor seventh)
   $roman = $mtr->parse('A+');    # I+ (augmented)
   $roman = $mtr->parse('BbM');   # bII (flat-two major)
+  $roman = $mtr->parse('Cm9/G'); # ...
 
   # Also:
   $mtr = Music::ToRoman->new(
@@ -86,8 +87,8 @@ Are we given chords with major ("M") and minor ("m") designations?
 
 Default: 1
 
-If this is set to 0, then only diatonic mode B<scale_name> output is rendered
-(other scales are ignored).
+If this is set to 0, single notes may be used to return the major/minor Roman
+numeral for the given diatonic mode B<scale_name>.
 
 =cut
 
