@@ -20,6 +20,11 @@ $roman = $mtr->parse('CM');
 is $roman, 'III', 'III';
 $roman = $mtr->parse('Cm9/G');
 is $roman, 'iii9/VII', 'iii9/VII';
+SKIP: {
+    skip "can't parse non-scale notes in the bass", 1;
+    $roman = $mtr->parse('Cm9/Bb');
+    is $roman, 'iii9/bii', 'iii9/bii';
+}
 $roman = $mtr->parse('Em7');
 is $roman, 'v7', 'v7';
 $roman = $mtr->parse('A+');
