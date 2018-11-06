@@ -83,7 +83,7 @@ has scale_name => (
 
 =head2 chords
 
-Are we given chords with major ("M") and minor ("m") designations?
+Are we given chords to B<parse> with major ("M") and minor ("m") designations?
 
 Default: 1
 
