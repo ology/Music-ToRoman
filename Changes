@@ -1,6 +1,10 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Improve documentation.
+    - Fix-up test cases.
+
+0.0500 2018-11-06 08:53:03
     - Fix ABSTRACT.
     - Improve documentation ever so slightly.
     - Capture accidentals in e.g. "chord/note#" type constructions.
