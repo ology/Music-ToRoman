@@ -1,6 +1,7 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Improved documentation ever so slightly.
 
 0.0300 2018-11-04 23:15:29
     - Adjusted major/minor scale logic.
