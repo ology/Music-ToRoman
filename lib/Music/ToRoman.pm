@@ -115,7 +115,7 @@ Create a new C<Music::ToRoman> object.
 
 Parse a note or chord name into a Roman numeral representation.
 
-For instance, the Roman numeral representation for the c<aeolian> (or minor)
+For instance, the Roman numeral representation for the C<aeolian> (or minor)
 mode is: i ii III iv v VI VII - where the case indicates the major/minor status
 of the given chord.
 
