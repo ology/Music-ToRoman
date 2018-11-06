@@ -33,9 +33,13 @@ use Music::Scales;
     scale_name => 'dorian',
     chords     => 0,
   );
-  $roman = $mtr->parse('A'); # i
-  $roman = $mtr->parse('B'); # ii
-  $roman = $mtr->parse('C'); # III
+  $roman = $mtr->parse('A');  # i
+  $roman = $mtr->parse('B');  # ii
+  $roman = $mtr->parse('C');  # III
+  $roman = $mtr->parse('D');  # IV
+  $roman = $mtr->parse('E7'); # v7
+  $roman = $mtr->parse('F#'); # vi
+  $roman = $mtr->parse('G');  # VII
 
 =head1 DESCRIPTION
 
