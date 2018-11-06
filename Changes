@@ -1,6 +1,9 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Fix ABSTRACT.
+
+0.0400 2018-11-05 17:17:33
     - Support diatonic modes when chords => 0.
     - Improve documentation ever so slightly.
 
