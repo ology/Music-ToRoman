@@ -1,18 +1,19 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
-    - Improved documentation ever so slightly.
+    - Support diatonic modes when chords => 0.
+    - Improve documentation ever so slightly.
 
 0.0300 2018-11-04 23:15:29
-    - Adjusted major/minor scale logic.
+    - Adjust major/minor scale logic.
 
 0.0200 2018-11-04 21:06:31
-    - Allowed chords with notes in the bass (e.g. "Cm9/G").
+    - Allow chords with notes in the bass (e.g. "Cm9/G").
 
 0.0101 2018-11-04 20:27:14
-    - Improved documentation.
-    - Added a test!
+    - Improve documentation.
+    - Add a test!
 
 0.0100 2018-11-04 20:07:56
-    - Minted by Dist::Zilla.
-    - Ported from eg scripts in Music::BachChoralHarmony.
+    - Mint by Dist::Zilla.
+    - Port from eg scripts in Music::BachChoralHarmony.
