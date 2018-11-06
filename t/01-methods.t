@@ -14,6 +14,8 @@ isa_ok $mtr, 'Music::ToRoman';
 
 my $roman = $mtr->parse('Am');
 is $roman, 'i', 'i';
+$roman = $mtr->parse('B');
+is $roman, 'II', 'II';
 $roman = $mtr->parse('Bo');
 is $roman, 'iio', 'iio';
 $roman = $mtr->parse('CM');
