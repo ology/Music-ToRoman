@@ -2,10 +2,12 @@ Revision history for Music-ToRoman
 
 {{$NEXT}}
     - Fix ABSTRACT.
+    - Improve documentation ever so slightly.
+    - Capture accidentals in e.g. "chord/note#" type constructions.
 
 0.0400 2018-11-05 17:17:33
     - Support diatonic modes when chords => 0.
-    - Improve documentation ever so slightly.
+    - Improve documentation.
 
 0.0300 2018-11-04 23:15:29
     - Adjust major/minor scale logic.
