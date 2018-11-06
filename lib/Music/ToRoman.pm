@@ -109,7 +109,17 @@ Create a new C<Music::ToRoman> object.
 
   $roman = $mtr->parse($chord);
 
-Parse a given chord name into a Roman numeral representation.
+Parse a note or chord name into a Roman numeral representation.
+
+For instance, the Roman numeral representation for the c<aeolian> (or minor)
+mode is: i ii III iv v VI VII - where the case indicates the major/minor status
+of the given chord.
+
+This can be overridden by parsing say, C<BM7> (B major seven), thus producing
+C<II7> in the key of A minor.
+
+If the B<chords> attribute is off and a single note is given, the diatonic mode
+of the B<scale_name> is used to find the correct Roman numeral representation.
 
 =cut
 
