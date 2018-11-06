@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0401';
+our $VERSION = '0.0500';
 
 use Moo;
 use strictures 2;
@@ -40,6 +40,9 @@ use Music::Scales;
 
 C<Music::ToRoman> converts chords to Roman numeral notation.  Also individual
 "chordless" notes may be converted given a diatonic mode B<scale_name>.
+
+For example usage, check out the files F<eg/roman> and F<eg/basslines> in
+L<Music::BachChoralHarmony>.
 
 =head1 ATTRIBUTES
 
@@ -176,10 +179,10 @@ sub parse {
     # Drop the minor and major part of the chord name
     $decorator =~ s/M//i;
 
-    if ( $decorator =~ /([A-G])/ ) {
+    if ( $decorator =~ /([A-G][#b]?)/ ) {
         my $letter = $1;
         $position = first_index { $_ eq $letter } @notes;
-        $decorator =~ s/[A-G]/$roman[$position]/;
+        $decorator =~ s/[A-G][#b]?/$roman[$position]/;
     }
 
     # Append the remaining decorator to the roman representation
