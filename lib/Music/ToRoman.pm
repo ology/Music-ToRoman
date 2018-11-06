@@ -1,8 +1,8 @@
 package Music::ToRoman;
 
-# ABSTRACT: Convert chords to Roman numeral notation
+# ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0400';
+our $VERSION = '0.0401';
 
 use Moo;
 use strictures 2;
