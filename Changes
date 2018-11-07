@@ -1,6 +1,9 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Default to major/ionian when chords attribute is off.
+
+0.0600 2018-11-06 17:44:07
     - Band-aid note-in-bass logic.
 
 0.0501 2018-11-06 11:55:41
