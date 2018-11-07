@@ -4,6 +4,8 @@ package Music::ToRoman;
 
 our $VERSION = '0.0501';
 
+use Carp;
+
 use Moo;
 use strictures 2;
 use namespace::clean;
@@ -197,7 +199,12 @@ sub parse {
     if ( $decorator =~ /([A-G][#b]?)/ ) {
         my $letter = $1;
         $position = first_index { $_ eq $letter } @notes;
-        $decorator =~ s/[A-G][#b]?/$roman[$position]/;
+        if ( $position >= 0 ) {
+            $decorator =~ s/[A-G][#b]?/$roman[$position]/;
+        }
+        else {
+            croak "Can't parse non-scale note in bass";
+        }
     }
 
     # Append the remaining decorator to the roman representation
