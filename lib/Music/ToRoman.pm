@@ -134,8 +134,7 @@ sub parse {
 
     # Literal diatonic modes when chords attribute is zero
     my @roman = qw( I ii iii IV V vi vii ); # Default to major/ionian
-    }
-    elsif ( $self->scale_name eq 'dorian' ) {
+    if ( $self->scale_name eq 'dorian' ) {
         @roman = qw( i ii III IV v vi VII );
     }
     elsif ( $self->scale_name eq 'phrygian' ) {
