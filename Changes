@@ -1,6 +1,9 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Band-aid note-in-bass logic.
+
+0.0501 2018-11-06 11:55:41
     - Improve documentation.
     - Fix-up test cases.
 
