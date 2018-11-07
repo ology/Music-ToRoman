@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0600';
+our $VERSION = '0.0700';
 
 use Carp;
 
@@ -133,9 +133,7 @@ sub parse {
     my ( $self, $chord ) = @_;
 
     # Literal diatonic modes when chords attribute is zero
-    my @roman;
-    if ( $self->scale_name eq 'major' || $self->scale_name eq 'ionian' ) {
-        @roman = qw( I ii iii IV V vi vii );
+    my @roman = qw( I ii iii IV V vi vii ); # Default to major/ionian
     }
     elsif ( $self->scale_name eq 'dorian' ) {
         @roman = qw( i ii III IV v vi VII );
