@@ -24,6 +24,7 @@ use Music::Scales;
   my $roman = $mtr->parse('Am'); # i (minor)
   $roman = $mtr->parse('Bo');    # iio (diminished)
   $roman = $mtr->parse('CM');    # III (major)
+  $roman = $mtr->parse('C');     # III (major)
   $roman = $mtr->parse('Em7');   # v7 (minor seventh)
   $roman = $mtr->parse('A+');    # I+ (augmented)
   $roman = $mtr->parse('BbM');   # bII (flat-two major)
@@ -48,8 +49,8 @@ use Music::Scales;
 C<Music::ToRoman> converts chords to Roman numeral notation.  Also individual
 "chordless" notes may be converted given a diatonic mode B<scale_name>.
 
-For example usage, check out the files F<eg/roman> and F<eg/basslines> in
-L<Music::BachChoralHarmony>.
+For example usage, check out the tests for this distribution and the files
+F<eg/roman> and F<eg/basslines> in L<Music::BachChoralHarmony>.
 
 =head1 ATTRIBUTES
 
@@ -123,6 +124,9 @@ of the given chord.
 
 This can be overridden by parsing say, C<BM7> (B major seven), thus producing
 C<II7> in the key of A minor.
+
+As expected, if a major/minor chord designation is not provided, "M" major is
+assumed.
 
 If the B<chords> attribute is off and a single note is given, the diatonic mode
 of the B<scale_name> is used to find the correct Roman numeral representation.
