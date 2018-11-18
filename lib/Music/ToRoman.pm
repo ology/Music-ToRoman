@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0700';
+our $VERSION = '0.0701';
 
 use Carp;
 
@@ -157,7 +157,7 @@ sub parse {
     my @notes = get_scale_notes( $self->scale_note, $self->scale_name );
 
     # Get just the note part of the chord name
-    ( my $note = $chord ) =~ s/^(\w[#b]?).*$/$1/;
+    ( my $note = $chord ) =~ s/^([A-G][#b]?).*$/$1/;
 
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
@@ -165,19 +165,19 @@ sub parse {
     if ( $position == -1 ) {
         if ( length($note) == 1 ) {
             $position = first_index { $_ =~ /$note/ } @notes;
-            ( $accidental = $notes[$position] ) =~ s/^\w(.)$/$1/;
+            ( $accidental = $notes[$position] ) =~ s/^[A-G](.)$/$1/;
             $accidental = $accidental eq '#' ? 'b' : '#';
         }
         else {
             my $letter;
-            ( $letter, $accidental ) = $note =~ /^(\w)(.)$/;
+            ( $letter, $accidental ) = $note =~ /^([A-G])(.)$/;
             $position = first_index { $_ eq $letter } @notes;
         }
     }
     $roman = $roman[$position];
 
     # Get everything but the note part
-    ( my $decorator = $chord ) =~ s/^(?:\w[#b]?)(.*)$/$1/;
+    ( my $decorator = $chord ) =~ s/^(?:[A-G][#b]?)(.*)$/$1/;
 
     # Are we minor or diminished?
     my $minor = $decorator =~ /[mo]/ ? 1 : 0;
