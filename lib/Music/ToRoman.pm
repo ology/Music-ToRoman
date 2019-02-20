@@ -131,6 +131,8 @@ assumed.
 If the B<chords> attribute is off and a single note is given, the diatonic mode
 of the B<scale_name> is used to find the correct Roman numeral representation.
 
+A diminished chord may be given as C<dim>, which is then converted to C<o>.
+
 =cut
 
 sub parse {
@@ -159,6 +161,9 @@ sub parse {
 
     # Get the scale notes
     my @notes = get_scale_notes( $self->scale_note, $self->scale_name );
+
+    # Convert a diminished chord
+    $chord =~ s/dim/o/;
 
     # Get just the note part of the chord name
     ( my $note = $chord ) =~ s/^([A-G][#b]?).*$/$1/;

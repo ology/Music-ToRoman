@@ -16,6 +16,7 @@ isa_ok $mtr, 'Music::ToRoman';
 is $mtr->parse('Am'), 'i', 'i';
 is $mtr->parse('B'), 'II', 'II';
 is $mtr->parse('Bo'), 'iio', 'iio';
+is $mtr->parse('Bdim'), 'iio', 'iio';
 is $mtr->parse('CM'), 'III', 'III';
 is $mtr->parse('Cm9/G'), 'iii9/VII', 'iii9/VII';
 throws_ok { $mtr->parse('Cm9/Bb') }
