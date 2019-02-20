@@ -1,6 +1,8 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+
+0.0701 2018-11-18 15:52:45
     - Restrict the note regex to [A-G] (instead of \w).
     - Improve documentation.
 
