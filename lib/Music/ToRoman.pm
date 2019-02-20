@@ -165,7 +165,7 @@ sub parse {
 
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
-    my ( $roman, $accidental );
+    my $accidental;
     if ( $position == -1 ) {
         if ( length($note) == 1 ) {
             $position = first_index { $_ =~ /$note/ } @notes;
@@ -178,7 +178,7 @@ sub parse {
             $position = first_index { $_ eq $letter } @notes;
         }
     }
-    $roman = $roman[$position];
+    my $roman = $roman[$position];
 
     # Get everything but the note part
     ( my $decorator = $chord ) =~ s/^(?:[A-G][#b]?)(.*)$/$1/;
