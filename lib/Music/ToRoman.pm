@@ -128,8 +128,7 @@ of the given chord.
 This can be overridden by parsing say, C<BM7> (B major seven), thus producing
 C<II7> in the key of A minor.
 
-As expected, if a major/minor chord designation is not provided, C<M> major is
-assumed.
+If a major/minor chord designation is not provided, C<M> major is assumed.
 
 If the B<chords> attribute is off and a single note is given, the diatonic mode
 of the B<scale_name> is used to find the correct Roman numeral representation.
