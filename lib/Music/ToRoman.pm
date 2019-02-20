@@ -59,7 +59,7 @@ L<Music::BachChoralHarmony>.
 
 =head2 scale_note
 
-Note on which the scale is based.  This can be one of C, Cb, C#, D, Db, D# ...
+Note on which the scale is based.
 
 Default: C
 
