@@ -97,7 +97,7 @@ Are we given chords to B<parse> with major (C<M>) and minor (C<m>) designations?
 
 Default: 1
 
-If this is set to 0, single notes may be used to return the major/minor Roman
+If this is set to 0, single notes can be used to return the major/minor Roman
 numeral for the given diatonic mode B<scale_name>.
 
 =cut
