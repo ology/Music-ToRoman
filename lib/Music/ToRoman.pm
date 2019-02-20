@@ -213,8 +213,8 @@ sub parse {
 
     # A remaining note name is a bass decorator
     if ( $decorator =~ /([A-G][#b]?)/ ) {
-        my $letter = $1;
-        $position = first_index { $_ eq $letter } @notes;
+        my $name = $1;
+        $position = first_index { $_ eq $name } @notes;
         if ( $position >= 0 ) {
             $decorator =~ s/[A-G][#b]?/$roman[$position]/;
         }
