@@ -200,7 +200,13 @@ sub parse {
     $roman = $accidental . $roman if $accidental;
 
     # Drop the minor and major part of the chord name
-    $decorator =~ s/M//i;
+    if ( $decorator =~ /Maj/ || $decorator =~ /min/ ) {
+        $decorator =~ s/(Maj|min)/ $1/;
+        $decorator = lc $decorator;
+    }
+    else {
+        $decorator =~ s/M//i;
+    }
 
     # A remaining note name is a bass decorator
     if ( $decorator =~ /([A-G][#b]?)/ ) {

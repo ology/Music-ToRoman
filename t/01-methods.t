@@ -25,6 +25,8 @@ is $mtr->parse('Em7'), 'v7', 'v7';
 is $mtr->parse('A+'), 'I+', 'I+';
 is $mtr->parse('BbM'), 'bII', 'bII';
 is $mtr->parse('Bm sus4'), 'ii sus4', 'ii sus4';
+is $mtr->parse('Bmin7'), 'ii min7', 'ii min7';
+is $mtr->parse('AMaj7'), 'I maj7', 'I maj7';
 
 $mtr = Music::ToRoman->new(
     scale_note => 'A',
