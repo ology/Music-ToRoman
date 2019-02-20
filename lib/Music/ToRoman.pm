@@ -201,12 +201,13 @@ sub parse {
     # Add any accidental found in a non-scale note
     $roman = $accidental . $roman if $accidental;
 
-    # Drop the minor and major part of the chord name
     if ( $decorator =~ /Maj/ || $decorator =~ /min/ ) {
+        # Move Maj or min over one
         $decorator =~ s/(Maj|min)/ $1/;
         $decorator = lc $decorator;
     }
     else {
+        # Drop the minor and major part of the chord name
         $decorator =~ s/M//i;
     }
 
