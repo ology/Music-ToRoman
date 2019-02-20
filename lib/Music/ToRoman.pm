@@ -197,7 +197,7 @@ sub parse {
     # Drop the minor and major part of the chord name
     $decorator =~ s/M//i;
 
-    # TODO: What/why?
+    # A remaining note name is a bass decorator
     if ( $decorator =~ /([A-G][#b]?)/ ) {
         my $letter = $1;
         $position = first_index { $_ eq $letter } @notes;
