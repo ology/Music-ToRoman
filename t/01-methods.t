@@ -22,6 +22,7 @@ is $mtr->parse('Cm9/G'), 'iii9/VII', 'iii9/VII';
 throws_ok { $mtr->parse('Cm9/Bb') }
     qr/non-scale note in bass/, "can't parse Cm9/Bb";
 is $mtr->parse('Em7'), 'v7', 'v7';
+is $mtr->parse('E7'), 'V7', 'V7';
 is $mtr->parse('A+'), 'I+', 'I+';
 is $mtr->parse('BbM'), 'bII', 'bII';
 is $mtr->parse('Bm sus4'), 'ii sus4', 'ii sus4';
