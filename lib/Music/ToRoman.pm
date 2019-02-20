@@ -23,6 +23,7 @@ use Music::Scales;
   );
   my $roman = $mtr->parse('Am'); # i (minor)
   $roman = $mtr->parse('Bo');    # iio (diminished)
+  $roman = $mtr->parse('Bdim');  # iio (diminished)
   $roman = $mtr->parse('CM');    # III (major)
   $roman = $mtr->parse('C');     # III (major)
   $roman = $mtr->parse('CMaj7'); # III maj7 (major seventh)
