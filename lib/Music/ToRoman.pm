@@ -31,7 +31,7 @@ use Music::Scales;
   $roman = $mtr->parse('Emin7'); # v min7 (minor seventh)
   $roman = $mtr->parse('A+');    # I+ (augmented)
   $roman = $mtr->parse('BbM');   # bII (flat-two major)
-  $roman = $mtr->parse('Cm9/G'); # iii9/VII (minor ninth with a seven in the bass)
+  $roman = $mtr->parse('Cm9/G'); # iii9/VII (minor ninth with seven in the bass)
 
   # Also:
   $mtr = Music::ToRoman->new(
