@@ -180,6 +180,7 @@ sub parse {
 
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
+    # If the note is note in the scale find a new position and accidental
     my $accidental;
     if ( $position == -1 ) {
         ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
@@ -235,14 +236,19 @@ sub _pos_acc {
 
     my $accidental;
 
+    # If the note has no accidental...
     if ( length($note) == 1 ) {
+        # Find the scale position of the closest note
         $position = first_index { $_ =~ /$note/ } @$notes;
+        # Get the accidental of the scale note
         ( $accidental = $notes->[$position] ) =~ s/^[A-G](.)$/$1/;
+        # TODO: Why?
         $accidental = $accidental eq '#' ? 'b' : '#';
     }
     else {
-        my $letter;
-        ( $letter, $accidental ) = $note =~ /^([A-G])(.)$/;
+        # Get the accidental of the given note
+        ( my $letter, $accidental ) = $note =~ /^([A-G])(.)$/;
+        # Get the scale position of the closest note
         $position = first_index { $_ eq $letter } @$notes;
     }
 
