@@ -48,6 +48,7 @@ is $mtr->parse('A7'), 'i7', 'i7';
 is $mtr->parse('B+'), 'ii+', 'ii+'; # Bogus chord
 is $mtr->parse('Co'), 'IIIo', 'IIIo'; # Bogus chord
 is $mtr->parse('Dmin7'), 'IV min7', 'IV min7'; # Bogus chord
+is $mtr->parse('Em'), 'v', 'v';
 is $mtr->parse('EMaj7'), 'v maj7', 'v maj7'; # Bogus chord
 is $mtr->parse('F#/G'), 'vi/VII', 'vi/VII';
 
