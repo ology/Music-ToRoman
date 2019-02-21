@@ -3,7 +3,6 @@ use strict;
 use warnings;
 
 use Test::More;
-use Test::Exception;
 
 use_ok 'Music::ToRoman';
 
@@ -21,15 +20,13 @@ is $mtr->parse('Bdim'), 'iio', 'iio';
 is $mtr->parse('Bm sus4'), 'ii sus4', 'ii sus4';
 is $mtr->parse('CM'), 'III', 'III';
 is $mtr->parse('Cm9/G'), 'iii9/VII', 'iii9/VII';
+is $mtr->parse('Cm9/Bb'), 'iii9/bii', 'iii9/bii';
 is $mtr->parse('DMaj7'), 'IV maj7', 'IV maj7';
 is $mtr->parse('E7'), 'V7', 'V7';
 is $mtr->parse('Em7'), 'v7', 'v7';
 is $mtr->parse('Emin7'), 'v min7', 'v min7';
 is $mtr->parse('F+'), 'VI+', 'VI+';
 is $mtr->parse('G xyz'), 'VII xyz', 'VII xyz';
-
-throws_ok { $mtr->parse('Cm9/Bb') }
-    qr/non-scale note in bass/, "can't parse Cm9/Bb";
 
 $mtr = Music::ToRoman->new(
     scale_note => 'A',

@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0802';
+our $VERSION = '0.0900';
 
 use Carp;
 
@@ -181,16 +181,7 @@ sub parse {
     my $position = first_index { $_ eq $note } @notes;
     my $accidental;
     if ( $position == -1 ) {
-        if ( length($note) == 1 ) {
-            $position = first_index { $_ =~ /$note/ } @notes;
-            ( $accidental = $notes[$position] ) =~ s/^[A-G](.)$/$1/;
-            $accidental = $accidental eq '#' ? 'b' : '#';
-        }
-        else {
-            my $letter;
-            ( $letter, $accidental ) = $note =~ /^([A-G])(.)$/;
-            $position = first_index { $_ eq $letter } @notes;
-        }
+        ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
     }
     my $roman = $roman[$position];
 
@@ -226,7 +217,9 @@ sub parse {
             $decorator =~ s/[A-G][#b]?/$roman[$position]/;
         }
         else {
-            croak "Can't parse non-scale note in bass";
+            ( $position, $accidental ) = _pos_acc( $name, $position, \@notes );
+            my $bass = $accidental . $roman[$position];
+            $decorator =~ s/[A-G][#b]?/$bass/;
         }
     }
 
@@ -234,6 +227,25 @@ sub parse {
     $roman .= $decorator;
 
     return $roman;
+}
+
+sub _pos_acc {
+    my ( $note, $position, $notes ) = @_;
+
+    my $accidental;
+
+    if ( length($note) == 1 ) {
+        $position = first_index { $_ =~ /$note/ } @$notes;
+        ( $accidental = $notes->[$position] ) =~ s/^[A-G](.)$/$1/;
+        $accidental = $accidental eq '#' ? 'b' : '#';
+    }
+    else {
+        my $letter;
+        ( $letter, $accidental ) = $note =~ /^([A-G])(.)$/;
+        $position = first_index { $_ eq $letter } @$notes;
+    }
+
+    return $position, $accidental;
 }
 
 1;
