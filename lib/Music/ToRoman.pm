@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0900';
+our $VERSION = '0.0901';
 
 use Carp;
 
@@ -201,9 +201,7 @@ sub parse {
     # Add any accidental found in a non-scale note
     $roman = $accidental . $roman if $accidental;
 
-    if ( $decorator =~ /Maj/ || $decorator =~ /min/ ) {
-        # Move Maj or min over one
-        $decorator =~ s/(Maj|min)/ $1/;
+    if ( $decorator =~ /maj/i || $decorator =~ /min/i ) {
         $decorator = lc $decorator;
     }
     else {
