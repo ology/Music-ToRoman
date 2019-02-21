@@ -28,6 +28,7 @@ use Music::Scales;
   $roman = $mtr->parse('CM');     # III (major)
   $roman = $mtr->parse('C');      # III (major)
   $roman = $mtr->parse('Cm9/G');  # iii9/VII (minor ninth with seven bass)
+  $roman = $mtr->parse('Cm9/Bb'); # iii9/bii (minor ninth with flat-two bass)
   $roman = $mtr->parse('D sus4'); # IV sus4
   $roman = $mtr->parse('DMaj7');  # IV maj7 (major seventh)
   $roman = $mtr->parse('E7');     # V7 (dominant seventh)
