@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0801';
+our $VERSION = '0.0802';
 
 use Carp;
 
@@ -27,12 +27,12 @@ use Music::Scales;
   $roman = $mtr->parse('CM');    # III (major)
   $roman = $mtr->parse('C');     # III (major)
   $roman = $mtr->parse('CMaj7'); # III maj7 (major seventh)
-  $roman = $mtr->parse('E7');    # V7 (dominant)
+  $roman = $mtr->parse('E7');    # V7 (dominant seventh)
   $roman = $mtr->parse('Em7');   # v7 (minor seventh)
   $roman = $mtr->parse('Emin7'); # v min7 (minor seventh)
   $roman = $mtr->parse('A+');    # I+ (augmented)
   $roman = $mtr->parse('BbM');   # bII (flat-two major)
-  $roman = $mtr->parse('Cm9/G'); # iii9/VII (minor ninth with seven in the bass)
+  $roman = $mtr->parse('Cm9/G'); # iii9/VII (minor ninth with seven bass)
 
   # Also:
   $mtr = Music::ToRoman->new(
@@ -123,11 +123,11 @@ Create a new C<Music::ToRoman> object.
 Parse a note or chord name into a Roman numeral representation.
 
 For instance, the Roman numeral representation for the C<aeolian> (or minor)
-mode is: i ii III iv v VI VII - where the case indicates the major/minor status
-of the given chord.
+mode is: C<i ii III iv v VI VII> - where the case indicates the major/minor
+status of the given chord.
 
-This can be overridden by parsing say, C<BM7> (B major seven), thus producing
-C<II7> in the key of A minor.
+This can be overridden by parsing say, C<BM7> (B dominant seventh), thus
+producing C<II7> in the key of A minor.
 
 If a major/minor chord designation is not provided, C<M> major is assumed.
 
