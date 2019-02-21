@@ -17,6 +17,7 @@ is $mtr->parse('Bb'), 'bII', 'bII';
 is $mtr->parse('B'), 'II', 'II';
 is $mtr->parse('Bo'), 'iio', 'iio';
 is $mtr->parse('Bdim'), 'iio', 'iio';
+is $mtr->parse('Bmsus4'), 'iisus4', 'iisus4';
 is $mtr->parse('Bm sus4'), 'ii sus4', 'ii sus4';
 is $mtr->parse('CM'), 'III', 'III';
 is $mtr->parse('Cm9/G'), 'iii9/VII', 'iii9/VII';
@@ -26,6 +27,8 @@ is $mtr->parse('E7'), 'V7', 'V7';
 is $mtr->parse('Em7'), 'v7', 'v7';
 is $mtr->parse('Emin7'), 'v min7', 'v min7';
 is $mtr->parse('F+'), 'VI+', 'VI+';
+is $mtr->parse('Gadd9'), 'VIIadd9', 'VIIadd9';
+is $mtr->parse('G add9'), 'VII add9', 'VII add9';
 is $mtr->parse('G xyz'), 'VII xyz', 'VII xyz';
 
 $mtr = Music::ToRoman->new(
