@@ -17,6 +17,7 @@ is $mtr->parse('Bb'), 'bII', 'bII';
 is $mtr->parse('B'), 'II', 'II';
 is $mtr->parse('Bo'), 'iio', 'iio';
 is $mtr->parse('Bdim'), 'iio', 'iio';
+is $mtr->parse('B dim'), 'ii o', 'ii o';
 is $mtr->parse('Bmsus4'), 'iisus4', 'iisus4';
 is $mtr->parse('Bm sus4'), 'ii sus4', 'ii sus4';
 is $mtr->parse('CM'), 'III', 'III';
