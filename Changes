@@ -1,6 +1,8 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+
+0.0900 2019-02-20 20:56:20
     - Allow parsing of non-scale notes in the bass (ex: "iii9/bii").
 
 0.0802 2019-02-20 20:28:18
