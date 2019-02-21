@@ -21,18 +21,19 @@ use Music::Scales;
     scale_note => 'A',
     scale_name => 'minor',
   );
-  my $roman = $mtr->parse('Am'); # i (minor)
-  $roman = $mtr->parse('Bo');    # iio (diminished)
-  $roman = $mtr->parse('Bdim');  # iio (diminished)
-  $roman = $mtr->parse('Bb');    # bII (flat-two major)
-  $roman = $mtr->parse('CM');    # III (major)
-  $roman = $mtr->parse('C');     # III (major)
-  $roman = $mtr->parse('Cm9/G'); # iii9/VII (minor ninth with seven bass)
-  $roman = $mtr->parse('DMaj7'); # IV maj7 (major seventh)
-  $roman = $mtr->parse('E7');    # V7 (dominant seventh)
-  $roman = $mtr->parse('Em7');   # v7 (minor seventh)
-  $roman = $mtr->parse('Fmin7'); # vi min7 (minor seventh)
-  $roman = $mtr->parse('G+');    # VII+ (augmented)
+  my $roman = $mtr->parse('Am');  # i (minor)
+  $roman = $mtr->parse('Bo');     # iio (diminished)
+  $roman = $mtr->parse('Bdim');   # iio (diminished)
+  $roman = $mtr->parse('Bb');     # bII (flat-two major)
+  $roman = $mtr->parse('CM');     # III (major)
+  $roman = $mtr->parse('C');      # III (major)
+  $roman = $mtr->parse('Cm9/G');  # iii9/VII (minor ninth with seven bass)
+  $roman = $mtr->parse('D sus4'); # IV sus4
+  $roman = $mtr->parse('DMaj7');  # IV maj7 (major seventh)
+  $roman = $mtr->parse('E7');     # V7 (dominant seventh)
+  $roman = $mtr->parse('Em7');    # v7 (minor seventh)
+  $roman = $mtr->parse('Fmin7');  # vi min7 (minor seventh)
+  $roman = $mtr->parse('G+');     # VII+ (augmented)
 
   # Also:
   $mtr = Music::ToRoman->new(
