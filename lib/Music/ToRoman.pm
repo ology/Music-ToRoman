@@ -180,7 +180,7 @@ sub parse {
 
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
-    # If the note is note in the scale find a new position and accidental
+    # If the note is not in the scale find a new position and accidental
     my $accidental;
     if ( $position == -1 ) {
         ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
