@@ -67,6 +67,8 @@ mode B<scale_name>.
 
 Note on which the scale is based.  Default: C<C>
 
+* Must be an uppercase letter.
+
 =cut
 
 has scale_note => (
@@ -78,6 +80,8 @@ has scale_note => (
 =head2 scale_name
 
 Name of the scale.  Default: C<major>
+
+* Must be a lowercase name.
 
 The diatonic mode names supported are:
 
@@ -103,6 +107,8 @@ Are we given chords to B<parse> with major (C<M>) and minor (C<m>)
 designations?
 
 Default: C<1>
+
+* Must be a Boolean value.
 
 If this is set to C<0>, single notes can be used to return the
 major/minor Roman numeral for the given diatonic mode B<scale_name>.
