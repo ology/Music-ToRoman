@@ -79,7 +79,7 @@ $mtr = Music::ToRoman->new( scale_note => 'C#' );
 isa_ok $mtr, 'Music::ToRoman';
 
 is $mtr->parse('C#m'), 'i', 'i';
-is $mtr->parse('D#b'), 'bII', 'bII';
+is $mtr->parse('D'), 'bII', 'bII';
 is $mtr->parse('D#'), 'II', 'II';
 is $mtr->parse('D#o'), 'iio', 'iio';
 is $mtr->parse('D#dim'), 'iio', 'iio';
@@ -88,7 +88,7 @@ is $mtr->parse('D#msus4'), 'iisus4', 'iisus4';
 is $mtr->parse('D#m sus4'), 'ii sus4', 'ii sus4';
 is $mtr->parse('E#M'), 'III', 'III';
 is $mtr->parse('E#m9/B#'), 'iii9/VII', 'iii9/VII';
-is $mtr->parse('E#m9/D#b'), 'iii9/bii', 'iii9/bii';
+is $mtr->parse('E#m9/D'), 'iii9/bii', 'iii9/bii';
 is $mtr->parse('F#Maj7'), 'IVmaj7', 'IVmaj7';
 is $mtr->parse('F# Maj7'), 'IV maj7', 'IV maj7';
 is $mtr->parse('G#7'), 'V7', 'V7';
