@@ -134,7 +134,7 @@ mode is: C<i ii III iv v VI VII> - where the case indicates the major/minor
 status of the given chord.
 
 This can be overridden by parsing say, C<BM7> (B dominant seventh), thus
-producing C<II7> in the key of A minor.
+producing C<II7>.
 
 If a major/minor chord designation is not provided, C<M> major is assumed.
 
