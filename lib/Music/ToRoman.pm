@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0902';
+our $VERSION = '0.0903';
 
 use Carp;
 use List::MoreUtils 'first_index';
