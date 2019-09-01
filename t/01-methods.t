@@ -17,7 +17,7 @@ throws_ok {
 
 throws_ok {
     Music::ToRoman->new( chords => 666 )
-} qr/Invalid boolean/, 'invalid chords';
+} qr/Invalid boolean/, 'invalid boolean';
 
 my $mtr = Music::ToRoman->new(
     scale_note => 'A',
