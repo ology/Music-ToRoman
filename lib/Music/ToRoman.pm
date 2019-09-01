@@ -82,7 +82,7 @@ has scale_note => (
 
 Name of the scale.  Default: C<major>
 
-* Must be a lowercase name as shown below.
+* Must be one of the lowercase names shown below.
 
 The diatonic mode names supported are:
 
