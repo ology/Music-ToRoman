@@ -78,7 +78,9 @@ has scale_note => (
 
 =head2 scale_name
 
-Name of the scale.  The diatonic mode names supported are:
+Name of the scale.  Default: C<major>
+
+The diatonic mode names supported are:
 
   ionian / major
   dorian
@@ -87,8 +89,6 @@ Name of the scale.  The diatonic mode names supported are:
   mixolydian
   aeolian / minor
   locrian
-
-Default: C<major>
 
 =cut
 
