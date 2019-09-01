@@ -1,6 +1,9 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Improve documentation.
+
+0.1000 2019-09-01 07:42:49
     - Improve documentation slightly.
     - Add isa attribute constraints and a no-chord parse error.
 
