@@ -2,6 +2,7 @@ Revision history for Music-ToRoman
 
 {{$NEXT}}
     - Improve documentation.
+    - Add a couple test cases.
 
 0.1001 2019-09-01 08:03:43
     - Improve documentation.
