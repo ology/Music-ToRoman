@@ -67,8 +67,8 @@ mode B<scale_name>.
 
 Note on which the scale is based.  Default: C<C>
 
-* Must be an uppercase letter.  Also double-sharp and double-flat keys
-are not allowed.
+* Must be an uppercase letter either alone or followed by C<#> or C<b>.
+Double-sharp and double-flat keys are not allowed.
 
 =cut
 
@@ -82,7 +82,7 @@ has scale_note => (
 
 Name of the scale.  Default: C<major>
 
-* Must be a lowercase name.
+* Must be a lowercase name as shown below.
 
 The diatonic mode names supported are:
 
