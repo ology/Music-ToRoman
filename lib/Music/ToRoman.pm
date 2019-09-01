@@ -21,6 +21,7 @@ use Music::Scales;
     scale_note => 'A',
     scale_name => 'minor',
   );
+
   my $roman = $mtr->parse('Am');  # i (minor)
   $roman = $mtr->parse('Bo');     # iio (diminished)
   $roman = $mtr->parse('Bdim');   # iio (diminished)
@@ -36,12 +37,12 @@ use Music::Scales;
   $roman = $mtr->parse('Fmin7');  # vi min7 (minor seventh)
   $roman = $mtr->parse('G+');     # VII+ (augmented)
 
-  # Also:
   $mtr = Music::ToRoman->new(
     scale_note => 'A',
     scale_name => 'dorian',
     chords     => 0,
   );
+
   $roman = $mtr->parse('A');      # i
   $roman = $mtr->parse('B');      # ii
   $roman = $mtr->parse('C');      # III
@@ -57,11 +58,9 @@ use Music::Scales;
 
 =head1 DESCRIPTION
 
-C<Music::ToRoman> converts chords to Roman numeral notation.  Also individual
-"chordless" notes may be converted given a diatonic mode B<scale_name>.
-
-For example usage, check out the files F<eg/roman> and F<eg/basslines> in
-L<Music::BachChoralHarmony>.
+C<Music::ToRoman> converts named chords to Roman numeral notation.
+Also individual "chordless" notes may be converted given a diatonic
+mode B<scale_name>.
 
 =head1 ATTRIBUTES
 
@@ -69,7 +68,7 @@ L<Music::BachChoralHarmony>.
 
 Note on which the scale is based.
 
-Default: C
+Default: C<C>
 
 =cut
 
@@ -90,7 +89,7 @@ Name of the scale.  The diatonic mode names supported are:
   aeolian / minor
   locrian
 
-Default: major
+Default: C<major>
 
 =cut
 
@@ -101,12 +100,13 @@ has scale_name => (
 
 =head2 chords
 
-Are we given chords to B<parse> with major (C<M>) and minor (C<m>) designations?
+Are we given chords to B<parse> with major (C<M>) and minor (C<m>)
+designations?
 
-Default: 1
+Default: C<1>
 
-If this is set to 0, single notes can be used to return the major/minor Roman
-numeral for the given diatonic mode B<scale_name>.
+If this is set to C<0>, single notes can be used to return the
+major/minor Roman numeral for the given diatonic mode B<scale_name>.
 
 =cut
 
@@ -117,13 +117,16 @@ has chords => (
 
 =head1 METHODS
 
-=head2 new()
+=head2 new
 
-  $mtr = Music::ToRoman->new(%arguments);
+  $mtr = Music::ToRoman->new(
+    scale_note => $note,
+    scale_name => $name,
+  );
 
 Create a new C<Music::ToRoman> object.
 
-=head2 parse()
+=head2 parse
 
   $roman = $mtr->parse($chord);
 
@@ -258,12 +261,15 @@ __END__
 
 =head1 SEE ALSO
 
-L<Moo>
-
 L<List::MoreUtils>
+
+L<Moo>
 
 L<Music::Scales>
 
 L<https://en.wikipedia.org/wiki/Roman_numeral_analysis>
+
+For example usage, check out the files F<eg/roman> and F<eg/basslines> in
+L<Music::BachChoralHarmony>.
 
 =cut
