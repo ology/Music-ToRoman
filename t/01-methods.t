@@ -3,14 +3,31 @@ use strict;
 use warnings;
 
 use Test::More;
+use Test::Exception;
 
 use_ok 'Music::ToRoman';
+
+throws_ok {
+    Music::ToRoman->new( scale_note => 'X' )
+} qr/Invalid note/, 'invalid note';
+
+throws_ok {
+    Music::ToRoman->new( scale_name => 'foo' )
+} qr/Invalid scale/, 'invalid scale';
+
+throws_ok {
+    Music::ToRoman->new( chords => 666 )
+} qr/Invalid boolean/, 'invalid chords';
 
 my $mtr = Music::ToRoman->new(
     scale_note => 'A',
     scale_name => 'minor',
 );
 isa_ok $mtr, 'Music::ToRoman';
+
+throws_ok {
+    $mtr->parse
+} qr/No chord/, 'no chord to parse';
 
 is $mtr->parse('Am'), 'i', 'i';
 is $mtr->parse('Bb'), 'bII', 'bII';

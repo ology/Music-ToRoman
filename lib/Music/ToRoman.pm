@@ -2,10 +2,10 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.0903';
+our $VERSION = '0.1000';
 
 use Carp;
-use List::MoreUtils 'first_index';
+use List::MoreUtils qw/ any first_index /;
 use Moo;
 use Music::Scales;
 
@@ -71,6 +71,7 @@ Note on which the scale is based.  Default: C<C>
 
 has scale_note => (
     is      => 'ro',
+    isa     => sub { die 'Invalid note' unless _valid_note( $_[0] ) },
     default => sub { 'C' },
 );
 
@@ -92,6 +93,7 @@ The diatonic mode names supported are:
 
 has scale_name => (
     is      => 'ro',
+    isa     => sub { die 'Invalid scale' unless _valid_scale( $_[0] ) },
     default => sub { 'major' },
 );
 
@@ -109,6 +111,7 @@ major/minor Roman numeral for the given diatonic mode B<scale_name>.
 
 has chords => (
     is      => 'ro',
+    isa     => sub { die 'Invalid boolean' unless $_[0] == 0 || $_[0] == 1 },
     default => sub { 1 },
 );
 
@@ -150,6 +153,9 @@ rendered as C<o>.
 
 sub parse {
     my ( $self, $chord ) = @_;
+
+    die 'No chord to parse'
+        unless $chord;
 
     # Literal diatonic modes when chords attribute is zero
     my @roman = qw( I ii iii IV V vi vii ); # Default to major/ionian
@@ -254,6 +260,38 @@ sub _pos_acc {
     }
 
     return $position, $accidental;
+}
+
+sub _valid_note {
+    my ($note) = @_;
+
+    my @valid = ();
+
+    my @notes = 'A' .. 'G';
+
+    push @valid, @notes;
+    push @valid, map { $_ . '#' } @notes;
+    push @valid, map { $_ . 'b' } @notes;
+
+    return any { $_ eq $note } @valid;
+}
+
+sub _valid_scale {
+    my ($name) = @_;
+
+    my @valid = qw(
+        ionian
+        major
+        dorian
+        phrygian
+        lydian
+        mixolydian
+        aeolian
+        minor
+        locrian
+    );
+
+    return any { $_ eq $name } @valid;
 }
 
 1;
