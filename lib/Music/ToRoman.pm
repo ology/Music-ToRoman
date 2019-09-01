@@ -148,9 +148,9 @@ thus producing C<II7>.
 If a major/minor chord designation is not provided, C<M> major is
 assumed.
 
-If the B<chords> attribute is off and a single note is given, the
-diatonic mode of the B<scale_name> is used to find the correct Roman
-numeral representation.
+If the B<chords> attribute is set to C<0> and a single note is given,
+the diatonic mode of the B<scale_name> is used to find the correct
+Roman numeral representation.
 
 A diminished chord may be given as either C<o> or C<dim>, and both are
 rendered as C<o>.
