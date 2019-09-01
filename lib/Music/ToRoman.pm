@@ -129,19 +129,22 @@ Create a new C<Music::ToRoman> object.
 
 Parse a note or chord name into a Roman numeral representation.
 
-For instance, the Roman numeral representation for the C<aeolian> (or minor)
-mode is: C<i ii III iv v VI VII> - where the case indicates the major/minor
-status of the given chord.
+For instance, the Roman numeral representation for the C<aeolian> (or
+minor) mode is: C<i ii III iv v VI VII> - where the case indicates the
+major/minor status of the given chord.
 
-This can be overridden by parsing say, C<BM7> (B dominant seventh), thus
-producing C<II7>.
+This can be overridden by parsing say, C<BM7> (B dominant seventh),
+thus producing C<II7>.
 
-If a major/minor chord designation is not provided, C<M> major is assumed.
+If a major/minor chord designation is not provided, C<M> major is
+assumed.
 
-If the B<chords> attribute is off and a single note is given, the diatonic mode
-of the B<scale_name> is used to find the correct Roman numeral representation.
+If the B<chords> attribute is off and a single note is given, the
+diatonic mode of the B<scale_name> is used to find the correct Roman
+numeral representation.
 
-A diminished chord may be given as C<dim>, which is then converted to C<o>.
+A diminished chord may be given as either C<o> or C<dim>, and both are
+rendered as C<o>.
 
 =cut
 
@@ -266,7 +269,7 @@ L<Music::Scales>
 
 L<https://en.wikipedia.org/wiki/Roman_numeral_analysis>
 
-For example usage, check out the files F<eg/roman> and F<eg/basslines> in
-L<Music::BachChoralHarmony>.
+For example usage, check out the files F<eg/roman> and F<eg/basslines>
+in L<Music::BachChoralHarmony>.
 
 =cut
