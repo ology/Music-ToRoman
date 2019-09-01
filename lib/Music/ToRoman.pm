@@ -5,13 +5,12 @@ package Music::ToRoman;
 our $VERSION = '0.0902';
 
 use Carp;
-
+use List::MoreUtils 'first_index';
 use Moo;
+use Music::Scales;
+
 use strictures 2;
 use namespace::clean;
-
-use List::MoreUtils 'first_index';
-use Music::Scales;
 
 =head1 SYNOPSIS
 
