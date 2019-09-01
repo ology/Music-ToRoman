@@ -67,7 +67,8 @@ mode B<scale_name>.
 
 Note on which the scale is based.  Default: C<C>
 
-* Must be an uppercase letter.
+* Must be an uppercase letter.  Also double-sharp and double-flat keys
+are not allowed.
 
 =cut
 
