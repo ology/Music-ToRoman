@@ -4,7 +4,6 @@ package Music::ToRoman;
 
 our $VERSION = '0.1001';
 
-use Carp;
 use List::MoreUtils qw/ any first_index /;
 use Moo;
 use Music::Scales;
