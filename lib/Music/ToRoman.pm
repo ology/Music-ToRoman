@@ -65,9 +65,7 @@ mode B<scale_name>.
 
 =head2 scale_note
 
-Note on which the scale is based.
-
-Default: C<C>
+Note on which the scale is based.  Default: C<C>
 
 =cut
 
