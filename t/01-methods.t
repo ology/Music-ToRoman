@@ -75,4 +75,58 @@ is $mtr->parse('Em'), 'v', 'v';
 is $mtr->parse('F#/G'), 'vi/VII', 'vi/VII';
 is $mtr->parse('Gb'), 'bVII', 'bVII';
 
+$mtr = Music::ToRoman->new( scale_note => 'C#' );
+isa_ok $mtr, 'Music::ToRoman';
+
+is $mtr->parse('C#m'), 'i', 'i';
+is $mtr->parse('D#b'), 'bII', 'bII';
+is $mtr->parse('D#'), 'II', 'II';
+is $mtr->parse('D#o'), 'iio', 'iio';
+is $mtr->parse('D#dim'), 'iio', 'iio';
+is $mtr->parse('D# dim'), 'ii o', 'ii o';
+is $mtr->parse('D#msus4'), 'iisus4', 'iisus4';
+is $mtr->parse('D#m sus4'), 'ii sus4', 'ii sus4';
+is $mtr->parse('E#M'), 'III', 'III';
+is $mtr->parse('E#m9/B#'), 'iii9/VII', 'iii9/VII';
+is $mtr->parse('E#m9/D#b'), 'iii9/bii', 'iii9/bii';
+is $mtr->parse('F#Maj7'), 'IVmaj7', 'IVmaj7';
+is $mtr->parse('F# Maj7'), 'IV maj7', 'IV maj7';
+is $mtr->parse('G#7'), 'V7', 'V7';
+is $mtr->parse('G#m7'), 'v7', 'v7';
+is $mtr->parse('G#min7'), 'vmin7', 'vmin7';
+is $mtr->parse('G# min7'), 'v min7', 'v min7';
+is $mtr->parse('A#+'), 'VI+', 'VI+';
+is $mtr->parse('B#add9'), 'VIIadd9', 'VIIadd9';
+is $mtr->parse('B# add9'), 'VII add9', 'VII add9';
+is $mtr->parse('B# xyz'), 'VII xyz', 'VII xyz';
+is $mtr->parse('C#5'), 'I5', 'I5';
+is $mtr->parse('C#64'), 'I64', 'I64';
+
+$mtr = Music::ToRoman->new( scale_note => 'Db' );
+isa_ok $mtr, 'Music::ToRoman';
+
+is $mtr->parse('Dbm'), 'i', 'i';
+is $mtr->parse('D'), 'bII', 'bII';
+is $mtr->parse('Eb'), 'II', 'II';
+is $mtr->parse('Ebo'), 'iio', 'iio';
+is $mtr->parse('Ebdim'), 'iio', 'iio';
+is $mtr->parse('Eb dim'), 'ii o', 'ii o';
+is $mtr->parse('Ebmsus4'), 'iisus4', 'iisus4';
+is $mtr->parse('Ebm sus4'), 'ii sus4', 'ii sus4';
+is $mtr->parse('FM'), 'III', 'III';
+is $mtr->parse('Fm9/C'), 'iii9/VII', 'iii9/VII';
+is $mtr->parse('Fm9/D'), 'iii9/bii', 'iii9/bii';
+is $mtr->parse('GbMaj7'), 'IVmaj7', 'IVmaj7';
+is $mtr->parse('Gb Maj7'), 'IV maj7', 'IV maj7';
+is $mtr->parse('Ab7'), 'V7', 'V7';
+is $mtr->parse('Abm7'), 'v7', 'v7';
+is $mtr->parse('Abmin7'), 'vmin7', 'vmin7';
+is $mtr->parse('Ab min7'), 'v min7', 'v min7';
+is $mtr->parse('Bb+'), 'VI+', 'VI+';
+is $mtr->parse('Cadd9'), 'VIIadd9', 'VIIadd9';
+is $mtr->parse('C add9'), 'VII add9', 'VII add9';
+is $mtr->parse('C xyz'), 'VII xyz', 'VII xyz';
+is $mtr->parse('Dbm5'), 'i5', 'i5';
+is $mtr->parse('Dbm64'), 'i64', 'i64';
+
 done_testing();
