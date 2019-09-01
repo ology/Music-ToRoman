@@ -50,6 +50,8 @@ is $mtr->parse('F+'), 'VI+', 'VI+';
 is $mtr->parse('Gadd9'), 'VIIadd9', 'VIIadd9';
 is $mtr->parse('G add9'), 'VII add9', 'VII add9';
 is $mtr->parse('G xyz'), 'VII xyz', 'VII xyz';
+is $mtr->parse('Am5'), 'i5', 'i5';
+is $mtr->parse('Am64'), 'i64', 'i64';
 
 $mtr = Music::ToRoman->new(
     scale_note => 'A',
