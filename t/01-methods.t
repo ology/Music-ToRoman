@@ -3,130 +3,148 @@ use strict;
 use warnings;
 
 use Test::More;
-use Test::Exception;
 
 use_ok 'Music::ToRoman';
 
-throws_ok {
-    Music::ToRoman->new( scale_note => 'X' )
-} qr/Invalid note/, 'invalid note';
-
-throws_ok {
-    Music::ToRoman->new( scale_name => 'foo' )
-} qr/Invalid scale/, 'invalid scale';
-
-throws_ok {
-    Music::ToRoman->new( chords => 123 )
-} qr/Invalid boolean/, 'invalid boolean';
-
-my $mtr = Music::ToRoman->new(
-    scale_note => 'A',
-    scale_name => 'minor',
-);
+my $mtr = Music::ToRoman->new;
 isa_ok $mtr, 'Music::ToRoman';
 
-throws_ok {
-    $mtr->parse
-} qr/No chord/, 'no chord to parse';
+diag 'C chords';
 
-is $mtr->parse('Am'), 'i', 'i';
-is $mtr->parse('Bb'), 'bII', 'bII';
-is $mtr->parse('B'), 'II', 'II';
-is $mtr->parse('Bo'), 'iio', 'iio';
-is $mtr->parse('Bdim'), 'iio', 'iio';
-is $mtr->parse('B dim'), 'ii o', 'ii o';
-is $mtr->parse('Bmsus4'), 'iisus4', 'iisus4';
-is $mtr->parse('Bm sus4'), 'ii sus4', 'ii sus4';
-is $mtr->parse('CM'), 'III', 'III';
-is $mtr->parse('Cm9/G'), 'iii9/VII', 'iii9/VII';
-is $mtr->parse('Cm9/Bb'), 'iii9/bii', 'iii9/bii';
-is $mtr->parse('DMaj7'), 'IVmaj7', 'IVmaj7';
-is $mtr->parse('D Maj7'), 'IV maj7', 'IV maj7';
-is $mtr->parse('E7'), 'V7', 'V7';
-is $mtr->parse('Em7'), 'v7', 'v7';
-is $mtr->parse('Emin7'), 'vmin7', 'vmin7';
-is $mtr->parse('E min7'), 'v min7', 'v min7';
-is $mtr->parse('F+'), 'VI+', 'VI+';
-is $mtr->parse('Gadd9'), 'VIIadd9', 'VIIadd9';
-is $mtr->parse('G add9'), 'VII add9', 'VII add9';
-is $mtr->parse('G xyz'), 'VII xyz', 'VII xyz';
-is $mtr->parse('Am5'), 'i5', 'i5';
-is $mtr->parse('Am64'), 'i64', 'i64';
+is $mtr->parse('C'), 'I', 'I';
+is $mtr->parse('Csus4'), 'Isus4', 'Isus4';
+is $mtr->parse('C sus4'), 'I sus4', 'I sus4';
+is $mtr->parse('Cadd9'), 'Iadd9', 'Iadd9';
+is $mtr->parse('C add9'), 'I add9', 'I add9';
+is $mtr->parse('CMaj7'), 'Imaj7', 'Imaj7';
+is $mtr->parse('C Maj7'), 'I maj7', 'I maj7';
+is $mtr->parse('C+'), 'I+', 'I+';
+is $mtr->parse('C xyz'), 'I xyz', 'I xyz';
+is $mtr->parse('C5'), 'I5', 'I5';
+is $mtr->parse('C64'), 'I64', 'I64';
+is $mtr->parse('Dbm'), 'bii', 'bii';
+is $mtr->parse('Dm'), 'ii', 'ii';
+is $mtr->parse('Ebm'), 'biii', 'biii';
+is $mtr->parse('Em'), 'iii', 'iii';
+is $mtr->parse('F'), 'IV', 'IV';
+is $mtr->parse('Gb'), 'bV', 'bV';
+is $mtr->parse('G'), 'V', 'V';
+is $mtr->parse('G7'), 'V7', 'V7';
+is $mtr->parse('Abm'), 'bvi', 'bvi';
+is $mtr->parse('Am'), 'vi', 'vi';
+is $mtr->parse('Bbo'), 'bviio', 'bviio';
+is $mtr->parse('Bo'), 'viio', 'viio';
+is $mtr->parse('Bdim'), 'viio', 'viio';
+is $mtr->parse('B dim'), 'vii o', 'vii o';
+
+diag 'C/X chords';
+
+is $mtr->parse('C/Db'), 'I/bii', 'I/bii';
+is $mtr->parse('C/D'), 'I/ii', 'I/ii';
+is $mtr->parse('C/Eb'), 'I/biii', 'I/biii';
+is $mtr->parse('C/E'), 'I/iii', 'I/iii';
+is $mtr->parse('C/F'), 'I/IV', 'I/IV';
+is $mtr->parse('C/Gb'), 'I/bV', 'I/bV';
+is $mtr->parse('C/G'), 'I/V', 'I/V';
+is $mtr->parse('C/Ab'), 'I/bvi', 'I/bvi';
+is $mtr->parse('C/A'), 'I/vi', 'I/vi';
+is $mtr->parse('C/Bb'), 'I/bvii', 'I/bvii';
+is $mtr->parse('C/B'), 'I/vii', 'I/vii';
 
 $mtr = Music::ToRoman->new(
-    scale_note => 'A',
+    scale_note => 'D',
     scale_name => 'dorian',
     chords     => 0,
 );
+
+diag 'D dorian';
+
+is $mtr->parse('D'), 'i', 'i';
+is $mtr->parse('E'), 'ii', 'ii';
+is $mtr->parse('F'), 'III', 'III';
+is $mtr->parse('G'), 'IV', 'IV';
+is $mtr->parse('A'), 'v', 'v';
+is $mtr->parse('B'), 'vi', 'vi';
+is $mtr->parse('C'), 'VII', 'VII';
+
+$mtr = Music::ToRoman->new(
+    scale_note => 'E',
+    scale_name => 'phrygian',
+    chords     => 0,
+);
+
+diag 'E phrygian';
+
+is $mtr->parse('E'), 'i', 'i';
+is $mtr->parse('F'), 'II', 'II';
+is $mtr->parse('G'), 'III', 'III';
+is $mtr->parse('A'), 'iv', 'iv';
+is $mtr->parse('B'), 'v', 'v';
+is $mtr->parse('C'), 'VI', 'VI';
+is $mtr->parse('D'), 'vii', 'vii';
+
+$mtr = Music::ToRoman->new(
+    scale_note => 'F',
+    scale_name => 'lydian',
+    chords     => 0,
+);
+
+diag 'F lydian';
+
+is $mtr->parse('F'), 'I', 'I';
+is $mtr->parse('G'), 'II', 'II';
+is $mtr->parse('A'), 'iii', 'iii';
+is $mtr->parse('B'), 'iv', 'iv';
+is $mtr->parse('C'), 'V', 'V';
+is $mtr->parse('D'), 'vi', 'vi';
+is $mtr->parse('E'), 'vii', 'vii';
+
+$mtr = Music::ToRoman->new(
+    scale_note => 'G',
+    scale_name => 'mixolydian',
+    chords     => 0,
+);
+
+diag 'G mixolydian';
+
+is $mtr->parse('G'), 'I', 'I';
+is $mtr->parse('A'), 'ii', 'ii';
+is $mtr->parse('B'), 'iii', 'iii';
+is $mtr->parse('C'), 'IV', 'IV';
+is $mtr->parse('D'), 'v', 'v';
+is $mtr->parse('E'), 'vi', 'vi';
+is $mtr->parse('F'), 'VII', 'VII';
+
+$mtr = Music::ToRoman->new(
+    scale_note => 'A',
+    scale_name => 'aeolian',
+    chords     => 0,
+);
+
+diag 'A aeolian';
+
 is $mtr->parse('A'), 'i', 'i';
 is $mtr->parse('B'), 'ii', 'ii';
 is $mtr->parse('C'), 'III', 'III';
-is $mtr->parse('D'), 'IV', 'IV';
+is $mtr->parse('D'), 'iv', 'iv';
 is $mtr->parse('E'), 'v', 'v';
-is $mtr->parse('F#'), 'vi', 'vi';
+is $mtr->parse('F'), 'VI', 'VI';
 is $mtr->parse('G'), 'VII', 'VII';
 
-is $mtr->parse('A7'), 'i7', 'i7';
-is $mtr->parse('B+'), 'ii+', 'ii+'; # Bogus chord
-is $mtr->parse('Co'), 'IIIo', 'IIIo'; # Bogus chord
-is $mtr->parse('Dmin7'), 'IVmin7', 'IVmin7'; # Bogus chord
-is $mtr->parse('EMaj7'), 'vmaj7', 'vmaj7'; # Bogus chord
-is $mtr->parse('Em'), 'v', 'v';
-is $mtr->parse('F#/G'), 'vi/VII', 'vi/VII';
-is $mtr->parse('Gb'), 'bVII', 'bVII';
+$mtr = Music::ToRoman->new(
+    scale_note => 'B',
+    scale_name => 'locrian',
+    chords     => 0,
+);
 
-$mtr = Music::ToRoman->new( scale_note => 'C#' );
-isa_ok $mtr, 'Music::ToRoman';
+diag 'B locrian';
 
-is $mtr->parse('C#m'), 'i', 'i';
-is $mtr->parse('D'), 'bII', 'bII';
-is $mtr->parse('D#'), 'II', 'II';
-is $mtr->parse('D#o'), 'iio', 'iio';
-is $mtr->parse('D#dim'), 'iio', 'iio';
-is $mtr->parse('D# dim'), 'ii o', 'ii o';
-is $mtr->parse('D#msus4'), 'iisus4', 'iisus4';
-is $mtr->parse('D#m sus4'), 'ii sus4', 'ii sus4';
-is $mtr->parse('E#'), 'III', 'III';
-is $mtr->parse('E#m9/B#'), 'iii9/vii', 'iii9/vii';
-is $mtr->parse('E#m9/D'), 'iii9/bii', 'iii9/bii';
-is $mtr->parse('F#Maj7'), 'IVmaj7', 'IVmaj7';
-is $mtr->parse('F# Maj7'), 'IV maj7', 'IV maj7';
-is $mtr->parse('G#7'), 'V7', 'V7';
-is $mtr->parse('G#m7'), 'v7', 'v7';
-is $mtr->parse('G#min7'), 'vmin7', 'vmin7';
-is $mtr->parse('G# min7'), 'v min7', 'v min7';
-is $mtr->parse('A#+'), 'VI+', 'VI+';
-is $mtr->parse('B#add9'), 'VIIadd9', 'VIIadd9';
-is $mtr->parse('B# add9'), 'VII add9', 'VII add9';
-is $mtr->parse('B# xyz'), 'VII xyz', 'VII xyz';
-is $mtr->parse('C#5'), 'I5', 'I5';
-is $mtr->parse('C#64'), 'I64', 'I64';
-
-$mtr = Music::ToRoman->new( scale_note => 'Db' );
-isa_ok $mtr, 'Music::ToRoman';
-
-is $mtr->parse('Dbm'), 'i', 'i';
-is $mtr->parse('D'), 'bII', 'bII';
-is $mtr->parse('Eb'), 'II', 'II';
-is $mtr->parse('Ebo'), 'iio', 'iio';
-is $mtr->parse('Ebdim'), 'iio', 'iio';
-is $mtr->parse('Eb dim'), 'ii o', 'ii o';
-is $mtr->parse('Ebmsus4'), 'iisus4', 'iisus4';
-is $mtr->parse('Ebm sus4'), 'ii sus4', 'ii sus4';
-is $mtr->parse('F'), 'III', 'III';
-is $mtr->parse('Fm9/C'), 'iii9/vii', 'iii9/vii';
-is $mtr->parse('Fm9/D'), 'iii9/bii', 'iii9/bii';
-is $mtr->parse('GbMaj7'), 'IVmaj7', 'IVmaj7';
-is $mtr->parse('Gb Maj7'), 'IV maj7', 'IV maj7';
-is $mtr->parse('Ab7'), 'V7', 'V7';
-is $mtr->parse('Abm7'), 'v7', 'v7';
-is $mtr->parse('Abmin7'), 'vmin7', 'vmin7';
-is $mtr->parse('Ab min7'), 'v min7', 'v min7';
-is $mtr->parse('Bb+'), 'VI+', 'VI+';
-is $mtr->parse('Cadd9'), 'VIIadd9', 'VIIadd9';
-is $mtr->parse('C add9'), 'VII add9', 'VII add9';
-is $mtr->parse('C xyz'), 'VII xyz', 'VII xyz';
-is $mtr->parse('Dbm5'), 'i5', 'i5';
-is $mtr->parse('Dbm64'), 'i64', 'i64';
+is $mtr->parse('B'), 'i', 'i';
+is $mtr->parse('C'), 'II', 'II';
+is $mtr->parse('D'), 'iii', 'iii';
+is $mtr->parse('E'), 'iv', 'iv';
+is $mtr->parse('F'), 'V', 'V';
+is $mtr->parse('G'), 'VI', 'VI';
+is $mtr->parse('A'), 'vii', 'vii';
 
 done_testing();
