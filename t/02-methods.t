@@ -58,7 +58,7 @@ $mtr = Music::ToRoman->new(
     chords     => 0,
 );
 
-diag 'D dorian';
+diag 'D# dorian';
 
 is $mtr->parse('D#'), 'i', 'i';
 is $mtr->parse('E#'), 'ii', 'ii';
