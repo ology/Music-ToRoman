@@ -6,10 +6,10 @@ use Test::More;
 
 use_ok 'Music::ToRoman';
 
+diag 'C# chords';
+
 my $mtr = Music::ToRoman->new( scale_note => 'C#' );
 isa_ok $mtr, 'Music::ToRoman';
-
-diag 'C# chords';
 
 is $mtr->parse('C#'), 'I', 'I';
 is $mtr->parse('C#sus4'), 'Isus4', 'Isus4';
@@ -52,13 +52,13 @@ is $mtr->parse('C#/A#'), 'I/vi', 'I/vi';
 is $mtr->parse('C#/B'), 'I/bvii', 'I/bvii';
 is $mtr->parse('C#/B#'), 'I/vii', 'I/vii';
 
+diag 'D# dorian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'D#',
     scale_name => 'dorian',
     chords     => 0,
 );
-
-diag 'D# dorian';
 
 is $mtr->parse('D#'), 'i', 'i';
 is $mtr->parse('E#'), 'ii', 'ii';
@@ -68,13 +68,13 @@ is $mtr->parse('A#'), 'v', 'v';
 is $mtr->parse('B#'), 'vi', 'vi';
 is $mtr->parse('C#'), 'VII', 'VII';
 
+diag 'E# phrygian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'E#',
     scale_name => 'phrygian',
     chords     => 0,
 );
-
-diag 'E# phrygian';
 
 is $mtr->parse('E#'), 'i', 'i';
 is $mtr->parse('F#'), 'II', 'II';
@@ -84,13 +84,13 @@ is $mtr->parse('B#'), 'v', 'v';
 is $mtr->parse('C#'), 'VI', 'VI';
 is $mtr->parse('D#'), 'vii', 'vii';
 
+diag 'F# lydian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'F#',
     scale_name => 'lydian',
     chords     => 0,
 );
-
-diag 'F# lydian';
 
 is $mtr->parse('F#'), 'I', 'I';
 is $mtr->parse('G#'), 'II', 'II';
@@ -100,13 +100,13 @@ is $mtr->parse('C#'), 'V', 'V';
 is $mtr->parse('D#'), 'vi', 'vi';
 is $mtr->parse('E#'), 'vii', 'vii';
 
+diag 'G# mixolydian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'G#',
     scale_name => 'mixolydian',
     chords     => 0,
 );
-
-diag 'G# mixolydian';
 
 is $mtr->parse('G#'), 'I', 'I';
 is $mtr->parse('A#'), 'ii', 'ii';
@@ -116,13 +116,13 @@ is $mtr->parse('D#'), 'v', 'v';
 is $mtr->parse('E#'), 'vi', 'vi';
 is $mtr->parse('F#'), 'VII', 'VII';
 
+diag 'A# aeolian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'A#',
     scale_name => 'aeolian',
     chords     => 0,
 );
-
-diag 'A# aeolian';
 
 is $mtr->parse('A#'), 'i', 'i';
 is $mtr->parse('B#'), 'ii', 'ii';
@@ -132,13 +132,13 @@ is $mtr->parse('E#'), 'v', 'v';
 is $mtr->parse('F#'), 'VI', 'VI';
 is $mtr->parse('G#'), 'VII', 'VII';
 
+diag 'B# locrian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'B#',
     scale_name => 'locrian',
     chords     => 0,
 );
-
-diag 'B# locrian';
 
 is $mtr->parse('B#'), 'i', 'i';
 is $mtr->parse('C#'), 'II', 'II';
@@ -148,10 +148,10 @@ is $mtr->parse('F#'), 'V', 'V';
 is $mtr->parse('G#'), 'VI', 'VI';
 is $mtr->parse('A#'), 'vii', 'vii';
 
+diag 'Db chords';
+
 $mtr = Music::ToRoman->new( scale_note => 'Db' );
 isa_ok $mtr, 'Music::ToRoman';
-
-diag 'Db chords';
 
 is $mtr->parse('Db'), 'I', 'I';
 is $mtr->parse('Dbsus4'), 'Isus4', 'Isus4';
@@ -194,13 +194,13 @@ is $mtr->parse('Db/Bb'), 'I/vi', 'I/vi';
 is $mtr->parse('Db/B'), 'I/bvii', 'I/bvii';
 is $mtr->parse('Db/C'), 'I/vii', 'I/vii';
 
+diag 'Eb dorian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'Eb',
     scale_name => 'dorian',
     chords     => 0,
 );
-
-diag 'Eb dorian';
 
 is $mtr->parse('Eb'), 'i', 'i';
 is $mtr->parse('F'), 'ii', 'ii';
@@ -210,13 +210,13 @@ is $mtr->parse('Bb'), 'v', 'v';
 is $mtr->parse('C'), 'vi', 'vi';
 is $mtr->parse('Db'), 'VII', 'VII';
 
+diag 'F phrygian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'F',
     scale_name => 'phrygian',
     chords     => 0,
 );
-
-diag 'F phrygian';
 
 is $mtr->parse('F'), 'i', 'i';
 is $mtr->parse('Gb'), 'II', 'II';
@@ -226,13 +226,13 @@ is $mtr->parse('C'), 'v', 'v';
 is $mtr->parse('Db'), 'VI', 'VI';
 is $mtr->parse('Eb'), 'vii', 'vii';
 
+diag 'Gb lydian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'Gb',
     scale_name => 'lydian',
     chords     => 0,
 );
-
-diag 'Gb lydian';
 
 is $mtr->parse('Gb'), 'I', 'I';
 is $mtr->parse('Ab'), 'II', 'II';
@@ -242,13 +242,13 @@ is $mtr->parse('Db'), 'V', 'V';
 is $mtr->parse('Eb'), 'vi', 'vi';
 is $mtr->parse('F'), 'vii', 'vii';
 
+diag 'Ab mixolydian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'Ab',
     scale_name => 'mixolydian',
     chords     => 0,
 );
-
-diag 'Ab mixolydian';
 
 is $mtr->parse('Ab'), 'I', 'I';
 is $mtr->parse('Bb'), 'ii', 'ii';
@@ -258,13 +258,13 @@ is $mtr->parse('Eb'), 'v', 'v';
 is $mtr->parse('F'), 'vi', 'vi';
 is $mtr->parse('Gb'), 'VII', 'VII';
 
+diag 'Bb aeolian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'Bb',
     scale_name => 'aeolian',
     chords     => 0,
 );
-
-diag 'Bb aeolian';
 
 is $mtr->parse('Bb'), 'i', 'i';
 is $mtr->parse('C'), 'ii', 'ii';
@@ -274,13 +274,13 @@ is $mtr->parse('F'), 'v', 'v';
 is $mtr->parse('Gb'), 'VI', 'VI';
 is $mtr->parse('Ab'), 'VII', 'VII';
 
+diag 'C locrian';
+
 $mtr = Music::ToRoman->new(
     scale_note => 'C',
     scale_name => 'locrian',
     chords     => 0,
 );
-
-diag 'C locrian';
 
 is $mtr->parse('C'), 'i', 'i';
 is $mtr->parse('Db'), 'II', 'II';
