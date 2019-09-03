@@ -268,7 +268,7 @@ sub parse {
 
     # Are we minor or diminished?
     my $minor = $decorator =~ /[mo]/ ? 1 : 0;
-    print "NOTE: $note, CHORD: $chord, POSN: $position, ACCI: $accidental, ROMAN: $roman, DECO: $decorator, MINOR: $minor\n" if $self->verbose;
+    print "NOTE: $note, CHORD: $chord, POSN: $position, ACCI: $accidental, ROMAN: $roman, DECO: $decorator\n" if $self->verbose;
 
     # Convert the case of the roman representation based on minor or major
     if ( $self->chords ) {
