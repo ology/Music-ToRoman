@@ -195,6 +195,8 @@ sub parse {
     die 'No chord to parse'
         unless $chord;
 
+    my $note_re = qr/[A-G][#b]?[#b]?/;
+
     # Literal diatonic modes when chords attribute is zero
     my @roman = qw( I ii iii IV V vi vii ); # Default to major/ionian
     if ( $self->scale_name eq 'dorian' ) {
@@ -256,7 +258,7 @@ sub parse {
     my $roman = $roman[$position];
 
     # Get everything but the note part
-    ( my $decorator = $chord ) =~ s/^(?:[A-G][#b]?[#b]?)(.*)$/$1/;
+    ( my $decorator = $chord ) =~ s/^(?:$note_re)(.*)$/$1/;
 
     # Are we minor or diminished?
     my $minor = $decorator =~ /[mo]/ ? 1 : 0;
@@ -280,18 +282,18 @@ sub parse {
     print "ROMAN: $roman, DECO: $decorator\n" if $self->verbose;
 
     # A remaining note name is a bass decorator
-    if ( $decorator =~ /([A-G][#b]?[#b]?)/ ) {
+    if ( $decorator =~ /($note_re)/ ) {
         my $name = $1;
         $position = first_index { $_ eq $name } @notes;
         print "NOTE: $name, POSN: $position\n" if $self->verbose;
         if ( $position >= 0 ) {
-            $decorator =~ s/[A-G][#b]?[#b]?/$roman[$position]/;
+            $decorator =~ s/$note_re/$roman[$position]/;
         }
         else {
             ( $position, $accidental ) = _pos_acc( $name, $position, \@notes );
             print "POSN: $position, ACCI: $accidental\n" if $self->verbose;
             my $bass = $accidental . $roman[$position];
-            $decorator =~ s/[A-G][#b]?[#b]?/$bass/;
+            $decorator =~ s/$note_re/$bass/;
 
             # Handle these unfortunate edge cases
             if ( $decorator =~ /#I\b/i && $roman[1] =~ /^[A-Z]+$/ ) {
