@@ -285,7 +285,18 @@ sub parse {
         # Drop the minor and major part of the chord name
         $decorator =~ s/M//i;
     }
-    print "ROMAN: $roman, DECO: $decorator\n" if $self->verbose;
+
+    # Handle these unfortunate edge cases
+    $roman =~ s/#I\b/bII/;
+    $roman =~ s/#i\b/bii/;
+    $roman =~ s/#II\b/bIII/;
+    $roman =~ s/#ii\b/biii/;
+    $roman =~ s/#IV\b/bV/;
+    $roman =~ s/#iv\b/bv/;
+    $roman =~ s/#V\b/bVI/;
+    $roman =~ s/#v\b/bvi/;
+    $roman =~ s/#VI\b/bVII/;
+    $roman =~ s/#vi\b/bvii/;
 
     # A remaining note name is a bass decorator
     if ( $decorator =~ /($note_re)/ ) {
@@ -333,21 +344,12 @@ sub parse {
                 $decorator =~ s/#VI\b/bvii/i;
             }
         }
+        print "BASS DECO: $decorator\n" if $self->verbose;
     }
-
-    $roman =~ s/#I\b/bII/;
-    $roman =~ s/#i\b/bii/;
-    $roman =~ s/#II\b/bIII/;
-    $roman =~ s/#ii\b/biii/;
-    $roman =~ s/#IV\b/bV/;
-    $roman =~ s/#iv\b/bv/;
-    $roman =~ s/#V\b/bVI/;
-    $roman =~ s/#v\b/bvi/;
-    $roman =~ s/#VI\b/bVII/;
-    $roman =~ s/#vi\b/bvii/;
 
     # Append the remaining decorator to the roman representation
     $roman .= $decorator;
+    print "FINAL ROMAN: $roman\n" if $self->verbose;
 
     return $roman;
 }
@@ -427,6 +429,7 @@ For example usage, check out the test files F<t/*> in this
 distribution.  Also see F<eg/roman> and F<eg/basslines> in
 L<Music::BachChoralHarmony>.
 
-L<App::MusicTools> C<vov> is the reverse of this module, and is significantly powerful.
+L<App::MusicTools> C<vov> is the reverse of this module, and is
+significantly powerful.
 
 =cut
