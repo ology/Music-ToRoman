@@ -2,6 +2,9 @@ Revision history for Music-ToRoman
 
 {{$NEXT}}
     - Improve documentation.
+
+0.1100 2019-09-02 19:04:20
+    - Improve documentation.
     - Add a major_tonic attribute.
     - Add a verbose attribute.
     - Add test cases for every key and scale mode.
