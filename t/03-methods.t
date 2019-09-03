@@ -32,6 +32,7 @@ is $mtr->parse('A'), 'V', 'V';
 is $mtr->parse('A7'), 'V7', 'V7';
 is $mtr->parse('Bbm'), 'bvi', 'bvi';
 is $mtr->parse('Bm'), 'vi', 'vi';
+is $mtr->parse('Cm'), 'bvii', 'bvii';
 is $mtr->parse('Co'), 'bviio', 'bviio';
 is $mtr->parse('C#o'), 'viio', 'viio';
 is $mtr->parse('C#dim'), 'viio', 'viio';
