@@ -12,6 +12,10 @@ throws_ok {
 } qr/Invalid note/, 'invalid note';
 
 throws_ok {
+    Music::ToRoman->new( major_tonic => 'X' )
+} qr/Invalid note/, 'invalid note';
+
+throws_ok {
     Music::ToRoman->new( scale_name => 'foo' )
 } qr/Invalid scale/, 'invalid scale';
 
