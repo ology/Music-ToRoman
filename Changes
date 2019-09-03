@@ -1,7 +1,12 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
-    - Add test cases for accidental keys.
+    - Improve documentation.
+    - Add a major_tonic attribute.
+    - Add a verbose attribute.
+    - Add test cases for every key and scale mode.
+    - Handle double accidental notes.
+    - Handle the weird cases where computed #X chords should be bY chords.
 
 0.1002 2019-09-01 09:04:22
     - Improve documentation.
