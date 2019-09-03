@@ -195,7 +195,9 @@ sub parse {
     die 'No chord to parse'
         unless $chord;
 
-    my $note_re = qr/[A-G][#b]?[#b]?/;
+    my $note_re  = qr/[A-G][#b]?[#b]?/;
+    my $upper_re = qr/^[A-Z]+$/;
+    my $lower_re = qr/^[a-z]+$/;
 
     # Literal diatonic modes when chords attribute is zero
     my @roman = qw( I ii iii IV V vi vii ); # Default to major/ionian
@@ -296,34 +298,34 @@ sub parse {
             $decorator =~ s/$note_re/$bass/;
 
             # Handle these unfortunate edge cases
-            if ( $decorator =~ /#I\b/i && $roman[1] =~ /^[A-Z]+$/ ) {
+            if ( $decorator =~ /#I\b/i && $roman[1] =~ /$upper_re/ ) {
                 $decorator =~ s/#I\b/bII/i;
             }
-            elsif ( $decorator =~ /#I\b/i && $roman[1] =~ /^[a-z]+$/ ) {
+            elsif ( $decorator =~ /#I\b/i && $roman[1] =~ /$lower_re/ ) {
                 $decorator =~ s/#I\b/bii/i;
             }
-            elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /^[A-Z]+$/ ) {
+            elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /$upper_re/ ) {
                 $decorator =~ s/#II\b/bIII/i;
             }
-            elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /^[a-z]+$/ ) {
+            elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /$lower_re/ ) {
                 $decorator =~ s/#II\b/biii/i;
             }
-            elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /^[A-Z]+$/ ) {
+            elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /$upper_re/ ) {
                 $decorator =~ s/#IV\b/bV/i;
             }
-            elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /^[a-z]+$/ ) {
+            elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /$lower_re/ ) {
                 $decorator =~ s/#IV\b/bv/i;
             }
-            elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /^[A-Z]+$/ ) {
+            elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /$upper_re/ ) {
                 $decorator =~ s/#V\b/bVI/i;
             }
-            elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /^[a-z]+$/ ) {
+            elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /$lower_re/ ) {
                 $decorator =~ s/#V\b/bvi/i;
             }
-            elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /^[A-Z]+$/ ) {
+            elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /$upper_re/ ) {
                 $decorator =~ s/#VI\b/bVII/i;
             }
-            elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /^[a-z]+$/ ) {
+            elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /$lower_re/ ) {
                 $decorator =~ s/#VI\b/bvii/i;
             }
         }
