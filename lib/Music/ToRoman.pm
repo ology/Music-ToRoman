@@ -295,44 +295,34 @@ sub parse {
 
             # Handle these unfortunate edge cases
             if ( $decorator =~ /#I\b/i && $roman[1] =~ /^[A-Z]+$/ ) {
-                $decorator =~ s/#I\b/bII/;
-                $decorator =~ s/#i\b/bII/;
+                $decorator =~ s/#I\b/bII/i;
             }
             elsif ( $decorator =~ /#I\b/i && $roman[1] =~ /^[a-z]+$/ ) {
-                $decorator =~ s/#I\b/bii/;
-                $decorator =~ s/#i\b/bii/;
+                $decorator =~ s/#I\b/bii/i;
             }
             elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /^[A-Z]+$/ ) {
-                $decorator =~ s/#II\b/bIII/;
-                $decorator =~ s/#ii\b/bIII/;
+                $decorator =~ s/#II\b/bIII/i;
             }
             elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /^[a-z]+$/ ) {
-                $decorator =~ s/#II\b/biii/;
-                $decorator =~ s/#ii\b/biii/;
+                $decorator =~ s/#II\b/biii/i;
             }
             elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /^[A-Z]+$/ ) {
-                $decorator =~ s/#IV\b/bV/;
-                $decorator =~ s/#iv\b/bV/;
+                $decorator =~ s/#IV\b/bV/i;
             }
             elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /^[a-z]+$/ ) {
-                $decorator =~ s/#IV\b/bv/;
-                $decorator =~ s/#iv\b/bv/;
+                $decorator =~ s/#IV\b/bv/i;
             }
             elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /^[A-Z]+$/ ) {
-                $decorator =~ s/#V\b/bVI/;
-                $decorator =~ s/#v\b/bVI/;
+                $decorator =~ s/#V\b/bVI/i;
             }
             elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /^[a-z]+$/ ) {
-                $decorator =~ s/#V\b/bvi/;
-                $decorator =~ s/#v\b/bvi/;
+                $decorator =~ s/#V\b/bvi/i;
             }
             elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /^[A-Z]+$/ ) {
-                $decorator =~ s/#VI\b/bVII/;
-                $decorator =~ s/#vi\b/bVII/;
+                $decorator =~ s/#VI\b/bVII/i;
             }
             elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /^[a-z]+$/ ) {
-                $decorator =~ s/#VI\b/bvii/;
-                $decorator =~ s/#vi\b/bvii/;
+                $decorator =~ s/#VI\b/bvii/i;
             }
         }
     }
