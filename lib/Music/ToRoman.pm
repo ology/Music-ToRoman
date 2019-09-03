@@ -425,7 +425,7 @@ L<Music::Scales>
 
 L<https://en.wikipedia.org/wiki/Roman_numeral_analysis>
 
-For example usage, check out the test files F<t/*> in this
+For example usage, check out the test files F<t/*-methods.t> in this
 distribution.  Also see F<eg/roman> and F<eg/basslines> in
 L<Music::BachChoralHarmony>.
 
