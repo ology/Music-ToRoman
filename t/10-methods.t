@@ -51,6 +51,7 @@ is $mtr->parse('A/F'), 'I/bvi', 'I/bvi';
 is $mtr->parse('A/F#'), 'I/vi', 'I/vi';
 is $mtr->parse('A/G'), 'I/bvii', 'I/bvii';
 is $mtr->parse('A/G#'), 'I/vii', 'I/vii';
+is $mtr->parse('Am xyz/G#'), 'i xyz/vii', 'i xyz/vii';
 
 diag 'B dorian';
 

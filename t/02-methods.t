@@ -51,6 +51,7 @@ is $mtr->parse('C#/A'), 'I/bvi', 'I/bvi';
 is $mtr->parse('C#/A#'), 'I/vi', 'I/vi';
 is $mtr->parse('C#/B'), 'I/bvii', 'I/bvii';
 is $mtr->parse('C#/B#'), 'I/vii', 'I/vii';
+is $mtr->parse('C#m xyz/B#'), 'i xyz/vii', 'i xyz/vii';
 
 diag 'D# dorian';
 
@@ -193,6 +194,7 @@ is $mtr->parse('Db/A'), 'I/bvi', 'I/bvi';
 is $mtr->parse('Db/Bb'), 'I/vi', 'I/vi';
 is $mtr->parse('Db/B'), 'I/bvii', 'I/bvii';
 is $mtr->parse('Db/C'), 'I/vii', 'I/vii';
+is $mtr->parse('Dbm xyz/C'), 'i xyz/vii', 'i xyz/vii';
 
 diag 'Eb dorian';
 

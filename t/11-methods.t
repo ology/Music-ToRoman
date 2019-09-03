@@ -75,6 +75,7 @@ SKIP: {
 is $mtr->parse('A#/F##'), 'I/vi', 'I/vi';
 is $mtr->parse('A#/Ab'), 'I/bvii', 'I/bvii';
 is $mtr->parse('A#/G##'), 'I/vii', 'I/vii';
+is $mtr->parse('A#m xyz/G##'), 'i xyz/vii', 'i xyz/vii';
 
 diag 'B# dorian';
 
@@ -220,6 +221,7 @@ is $mtr->parse('Bb/Gb'), 'I/bvi', 'I/bvi';
 is $mtr->parse('Bb/G'), 'I/vi', 'I/vi';
 is $mtr->parse('Bb/Ab'), 'I/bvii', 'I/bvii';
 is $mtr->parse('Bb/A'), 'I/vii', 'I/vii';
+is $mtr->parse('Bbm xyz/A'), 'i xyz/vii', 'i xyz/vii';
 
 diag 'C dorian';
 
