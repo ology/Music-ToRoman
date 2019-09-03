@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.1105';
+our $VERSION = '0.1106';
 
 use List::MoreUtils qw/ any first_index /;
 use Moo;
@@ -66,8 +66,8 @@ mode B<scale_name>.
 
 Note on which the scale is based.  Default: C<C>
 
-This must be an uppercase letter from A-G either alone or followed by
-C<#> or C<b>.
+This must be an uppercase letter from C<A-G> either alone or followed
+by C<#> or C<b>.
 
 Note that the keys of C<A#>, C<D#>, C<E#> and C<Fb> are better
 represented by C<Gb>, C<Eb>, C<F> and C<E> respectively, because they
@@ -107,12 +107,12 @@ has scale_name => (
 
 Note on which the C<major> scale is based.  Default: C<'C'>
 
-This must be an uppercase letter from A-G and followed by a C<#> or
+This must be an uppercase letter from C<A-G> and followed by a C<#> or
 C<b>.
 
-This attribute is required when the B<scale_note> is either a
-double-sharp or double-flat and the B<scale_name> is neither C<major>
-nor C<ionian>.
+This attribute is required when the chord to B<parse> is a half-step
+below a double-accidental (see the note above under L</scale_note>)
+and the B<scale_name> is not C<major> (or C<ionian>).
 
 =cut
 
@@ -124,8 +124,8 @@ has major_tonic => (
 
 =head2 chords
 
-Are we given chords to B<parse> with major (C<M>) and minor (C<m>)
-designations?
+Are we given chords to parse with major (C<M>) or minor
+(C<m>/C<o>/C<dim>) designations?
 
 Default: C<1>
 
@@ -181,16 +181,14 @@ thus producing C<II7>.
 If a major/minor chord designation is not provided, C<M> major is
 assumed.
 
-If the B<chords> attribute is set to C<0> and a single note is given,
-the diatonic mode of the B<scale_name> is used to find the correct
-Roman numeral representation.
+A diminished chord may be given as either C<o> or C<dim>.
 
-A diminished chord may be given as either C<o> or C<dim>, and both are
-rendered as C<o>.
+If the B<chords> attribute is set to C<0>, the B<scale_name> is used
+to figure out the correct Roman numeral representation.
 
-If the B<scale_note> to parse is a double accidental and the
-B<scale_name> is not C<major> (or C<ionian>), the B<major_tonic> must
-be supplied.
+If the chord to parse is a half-step below a double-accidental (see
+L</scale_note> above), and the B<scale_name> is not C<major> (or
+C<ionian>), the B<major_tonic> must be set in the constructor.
 
 =cut
 
