@@ -159,6 +159,7 @@ has verbose => (
     scale_note  => $note,
     scale_name  => $name,
     major_tonic => $tonic,
+    chords      => $chords,
     verbose     => $verbose,
   );
 
