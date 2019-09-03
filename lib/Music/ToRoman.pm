@@ -66,8 +66,8 @@ mode B<scale_name>.
 
 Note on which the scale is based.  Default: C<C>
 
-* Must be an uppercase letter either alone or followed by C<#> or C<b>.
-Double-sharp and double-flat keys are not allowed.
+This must be an uppercase letter from A-G either alone or followed by
+C<#> or C<b>.
 
 =cut
 
@@ -80,8 +80,6 @@ has scale_note => (
 =head2 scale_name
 
 Name of the scale.  Default: C<major>
-
-* Must be one of the lowercase names shown below.
 
 The diatonic mode names supported are:
 
@@ -99,6 +97,24 @@ has scale_name => (
     is      => 'ro',
     isa     => sub { die 'Invalid scale' unless _valid_scale( $_[0] ) },
     default => sub { 'major' },
+);
+
+=head2 major_tonic
+
+Note on which the C<major> scale is based.  Default: C<'C'>
+
+This must be an uppercase letter from A-G and followed by a C<#>.
+
+This attribute is required when the B<scale_note> is either a
+double-sharp or double-flat and the B<scale_name> is neither C<major>
+nor C<ionian>.
+
+=cut
+
+has major_tonic => (
+    is      => 'ro',
+    isa     => sub { die 'Invalid note' unless _valid_note( $_[0] ) },
+    default => sub { 'C' },
 );
 
 =head2 chords
@@ -119,6 +135,17 @@ has chords => (
     is      => 'ro',
     isa     => sub { die 'Invalid boolean' unless $_[0] == 0 || $_[0] == 1 },
     default => sub { 1 },
+);
+
+=head2 verbose
+
+Show the progress of the B<parse> method.  Default C<0>
+
+=cut
+
+has verbose => (
+    is      => 'ro',
+    default => sub { 0 },
 );
 
 =head1 METHODS
@@ -183,15 +210,35 @@ sub parse {
     elsif ( $self->scale_name eq 'locrian' ) {
         @roman = qw( i II iii iv V VI vii );
     }
+    print "ROMAN: @roman\n" if $self->verbose;
 
     # Get the scale notes
-    my @notes = get_scale_notes( $self->scale_note, $self->scale_name );
+    my @notes;
+    if ( ( $self->scale_note =~ /##/ || $self->scale_note =~ /bb/ ) && $self->scale_name ne 'major' && $self->scale_name ne 'ionian' ) {
+        my %modes = (
+            dorian     => 2,
+            phrygian   => 3,
+            lydian     => 4,
+            mixolydian => 5,
+            aeolian    => 6,
+            minor      => 6,
+            locrian    => 7,
+        );
+
+        @notes = get_scale_notes( $self->major_tonic, 'major' );
+
+        push @notes, shift @notes for 1 .. $modes{ $self->scale_name } - 1;
+    }
+    else {
+        @notes = get_scale_notes( $self->scale_note, $self->scale_name );
+    }
+    print "NOTES: @notes\n" if $self->verbose;
 
     # Convert a diminished chord
     $chord =~ s/dim/o/;
 
     # Get just the note part of the chord name
-    ( my $note = $chord ) =~ s/^([A-G][#b]?).*$/$1/;
+    ( my $note = $chord ) =~ s/^([A-G][#b]?[#b]?).*$/$1/;
 
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
@@ -200,13 +247,15 @@ sub parse {
     if ( $position == -1 ) {
         ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
     }
+    $accidental ||= '';
     my $roman = $roman[$position];
 
     # Get everything but the note part
-    ( my $decorator = $chord ) =~ s/^(?:[A-G][#b]?)(.*)$/$1/;
+    ( my $decorator = $chord ) =~ s/^(?:[A-G][#b]?[#b]?)(.*)$/$1/;
 
     # Are we minor or diminished?
     my $minor = $decorator =~ /[mo]/ ? 1 : 0;
+    print "NOTE: $note, CHORD: $chord, POSN: $position, ACCI: $accidental, ROMAN: $roman, DECO: $decorator, MINOR: $minor\n" if $self->verbose;
 
     # Convert the case of the roman representation based on minor or major
     if ( $self->chords ) {
@@ -223,20 +272,76 @@ sub parse {
         # Drop the minor and major part of the chord name
         $decorator =~ s/M//i;
     }
+    print "ROMAN: $roman, DECO: $decorator\n" if $self->verbose;
 
     # A remaining note name is a bass decorator
-    if ( $decorator =~ /([A-G][#b]?)/ ) {
+    if ( $decorator =~ /([A-G][#b]?[#b]?)/ ) {
         my $name = $1;
         $position = first_index { $_ eq $name } @notes;
+        print "NOTE: $name, POSN: $position\n" if $self->verbose;
         if ( $position >= 0 ) {
-            $decorator =~ s/[A-G][#b]?/$roman[$position]/;
+            $decorator =~ s/[A-G][#b]?[#b]?/$roman[$position]/;
         }
         else {
             ( $position, $accidental ) = _pos_acc( $name, $position, \@notes );
+            print "POSN: $position, ACCI: $accidental\n" if $self->verbose;
             my $bass = $accidental . $roman[$position];
-            $decorator =~ s/[A-G][#b]?/$bass/;
+            $decorator =~ s/[A-G][#b]?[#b]?/$bass/;
+
+            # Handle these unfortunate edge cases
+            if ( $decorator =~ /#I\b/i && $roman[1] =~ /^[A-Z]+$/ ) {
+                $decorator =~ s/#I\b/bII/;
+                $decorator =~ s/#i\b/bII/;
+            }
+            elsif ( $decorator =~ /#I\b/i && $roman[1] =~ /^[a-z]+$/ ) {
+                $decorator =~ s/#I\b/bii/;
+                $decorator =~ s/#i\b/bii/;
+            }
+            elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /^[A-Z]+$/ ) {
+                $decorator =~ s/#II\b/bIII/;
+                $decorator =~ s/#ii\b/bIII/;
+            }
+            elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /^[a-z]+$/ ) {
+                $decorator =~ s/#II\b/biii/;
+                $decorator =~ s/#ii\b/biii/;
+            }
+            elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /^[A-Z]+$/ ) {
+                $decorator =~ s/#IV\b/bV/;
+                $decorator =~ s/#iv\b/bV/;
+            }
+            elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /^[a-z]+$/ ) {
+                $decorator =~ s/#IV\b/bv/;
+                $decorator =~ s/#iv\b/bv/;
+            }
+            elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /^[A-Z]+$/ ) {
+                $decorator =~ s/#V\b/bVI/;
+                $decorator =~ s/#v\b/bVI/;
+            }
+            elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /^[a-z]+$/ ) {
+                $decorator =~ s/#V\b/bvi/;
+                $decorator =~ s/#v\b/bvi/;
+            }
+            elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /^[A-Z]+$/ ) {
+                $decorator =~ s/#VI\b/bVII/;
+                $decorator =~ s/#vi\b/bVII/;
+            }
+            elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /^[a-z]+$/ ) {
+                $decorator =~ s/#VI\b/bvii/;
+                $decorator =~ s/#vi\b/bvii/;
+            }
         }
     }
+
+    $roman =~ s/#I\b/bII/;
+    $roman =~ s/#i\b/bii/;
+    $roman =~ s/#II\b/bIII/;
+    $roman =~ s/#ii\b/biii/;
+    $roman =~ s/#IV\b/bV/;
+    $roman =~ s/#iv\b/bv/;
+    $roman =~ s/#V\b/bVI/;
+    $roman =~ s/#v\b/bvi/;
+    $roman =~ s/#VI\b/bVII/;
+    $roman =~ s/#vi\b/bvii/;
 
     # Append the remaining decorator to the roman representation
     $roman .= $decorator;
@@ -277,7 +382,9 @@ sub _valid_note {
 
     push @valid, @notes;
     push @valid, map { $_ . '#' } @notes;
+    push @valid, map { $_ . '##' } @notes;
     push @valid, map { $_ . 'b' } @notes;
+    push @valid, map { $_ . 'bb' } @notes;
 
     return any { $_ eq $note } @valid;
 }
