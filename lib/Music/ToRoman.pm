@@ -245,7 +245,7 @@ sub parse {
     $chord =~ s/dim/o/;
 
     # Get just the note part of the chord name
-    ( my $note = $chord ) =~ s/^([A-G][#b]?[#b]?).*$/$1/;
+    ( my $note = $chord ) =~ s/^($note_re).*$/$1/;
 
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
