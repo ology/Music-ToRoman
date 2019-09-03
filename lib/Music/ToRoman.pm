@@ -344,7 +344,7 @@ sub parse {
                 $decorator =~ s/#VI\b/bvii/i;
             }
         }
-        print "BASS DECO: $decorator\n" if $self->verbose;
+        print "DECO: $decorator\n" if $self->verbose;
     }
 
     # Append the remaining decorator to the roman representation
