@@ -103,7 +103,8 @@ has scale_name => (
 
 Note on which the C<major> scale is based.  Default: C<'C'>
 
-This must be an uppercase letter from A-G and followed by a C<#>.
+This must be an uppercase letter from A-G and followed by a C<#> or
+C<b>.
 
 This attribute is required when the B<scale_note> is either a
 double-sharp or double-flat and the B<scale_name> is neither C<major>
@@ -123,8 +124,6 @@ Are we given chords to B<parse> with major (C<M>) and minor (C<m>)
 designations?
 
 Default: C<1>
-
-* Must be a Boolean value.
 
 If this is set to C<0>, single notes can be used to return the
 major/minor Roman numeral for the given diatonic mode B<scale_name>.
@@ -153,8 +152,10 @@ has verbose => (
 =head2 new
 
   $mtr = Music::ToRoman->new(
-    scale_note => $note,
-    scale_name => $name,
+    scale_note  => $note,
+    scale_name  => $name,
+    major_tonic => $tonic,
+    verbose     => $verbose,
   );
 
 Create a new C<Music::ToRoman> object.
@@ -181,6 +182,10 @@ Roman numeral representation.
 
 A diminished chord may be given as either C<o> or C<dim>, and both are
 rendered as C<o>.
+
+If the B<scale_note> to parse is a double accidental and the
+B<scale_name> is not C<major> (or C<ionian>), the B<major_tonic> must
+be supplied.
 
 =cut
 
