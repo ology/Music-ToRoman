@@ -423,8 +423,9 @@ L<Music::Scales>
 
 L<https://en.wikipedia.org/wiki/Roman_numeral_analysis>
 
-For example usage, check out the files F<eg/roman> and F<eg/basslines>
-in L<Music::BachChoralHarmony>.
+For example usage, check out the test files F<t/*> in this
+distribution.  Also see F<eg/roman> and F<eg/basslines> in
+L<Music::BachChoralHarmony>.
 
 L<App::MusicTools> C<vov> is the reverse of this module, and is significantly powerful.
 
