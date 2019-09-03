@@ -69,6 +69,10 @@ Note on which the scale is based.  Default: C<C>
 This must be an uppercase letter from A-G either alone or followed by
 C<#> or C<b>.
 
+Note that the keys of C<A#>, C<D#>, C<E#> and C<Fb> are better
+represented by C<Gb>, C<Eb>, C<F> and C<E> respectively, because they
+contain notes with double accidentals.
+
 =cut
 
 has scale_note => (
