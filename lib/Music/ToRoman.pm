@@ -199,8 +199,6 @@ sub parse {
         unless $chord;
 
     my $note_re  = qr/[A-G][#b]?[#b]?/;
-    my $upper_re = qr/^[A-Z]+$/;
-    my $lower_re = qr/^[a-z]+$/;
 
     # Get the roman representation of the scale
     my @scale = $self->_get_scale_mode; # Default to major/ionian
