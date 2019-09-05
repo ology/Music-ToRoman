@@ -46,10 +46,10 @@ is $mtr->parse('B-'), 'vii', 'vii';
 };
 SKIP: {
     skip 'U+25B3 works but is it needed?', 1;
-    is $mtr->parse('Bm △7'), 'vii △7', 'vii △7';
+    is $mtr->parse('B △7'), 'VII △7', 'VII △7';
 };
 SKIP: {
-    skip 'U+00F8 is not handled yet.', 1;
+    skip 'U+00F8 does not mean diminished yet.', 1;
     is $mtr->parse('Bø'), 'viiø', 'viiø';
 };
 
