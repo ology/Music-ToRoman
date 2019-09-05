@@ -8,7 +8,7 @@ use_ok 'Music::ToRoman';
 
 diag 'C chords';
 
-my $mtr = Music::ToRoman->new;
+my $mtr = Music::ToRoman->new;#( verbose => 1 );
 isa_ok $mtr, 'Music::ToRoman';
 
 is $mtr->parse('C'), 'I', 'I';
@@ -32,6 +32,9 @@ is $mtr->parse('G'), 'V', 'V';
 is $mtr->parse('G7'), 'V7', 'V7';
 is $mtr->parse('Abm'), 'bvi', 'bvi';
 is $mtr->parse('Am'), 'vi', 'vi';
+is $mtr->parse('Am7'), 'vi7', 'vi7';
+is $mtr->parse('Am7b5'), 'vi7b5', 'vi7b5';
+is $mtr->parse('Amin7'), 'vimin7', 'vimin7';
 is $mtr->parse('Bbo'), 'bviio', 'bviio';
 is $mtr->parse('Bo'), 'viio', 'viio';
 is $mtr->parse('Bdim'), 'viio', 'viio';
