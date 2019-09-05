@@ -12,6 +12,7 @@ my $mtr = Music::ToRoman->new;#( verbose => 1 );
 isa_ok $mtr, 'Music::ToRoman';
 
 is $mtr->parse('C'), 'I', 'I';
+is $mtr->parse('CM'), 'I', 'I';
 is $mtr->parse('Csus4'), 'Isus4', 'Isus4';
 is $mtr->parse('C sus4'), 'I sus4', 'I sus4';
 is $mtr->parse('Cadd9'), 'Iadd9', 'Iadd9';
@@ -39,6 +40,18 @@ is $mtr->parse('Bbo'), 'bviio', 'bviio';
 is $mtr->parse('Bo'), 'viio', 'viio';
 is $mtr->parse('Bdim'), 'viio', 'viio';
 is $mtr->parse('B dim'), 'vii o', 'vii o';
+SKIP: {
+    skip '- does not mean minor yet.', 1;
+is $mtr->parse('B-'), 'vii', 'vii';
+};
+SKIP: {
+    skip 'U+25B3 works but is it needed?', 1;
+    is $mtr->parse('Bm △7'), 'vii △7', 'vii △7';
+};
+SKIP: {
+    skip 'U+00F8 is not handled yet.', 1;
+    is $mtr->parse('Bø'), 'viiø', 'viiø';
+};
 
 diag 'C/X chords';
 
