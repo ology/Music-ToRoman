@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.1200';
+our $VERSION = '0.1300';
 
 use List::MoreUtils qw/ any first_index /;
 use Moo;
@@ -10,6 +10,8 @@ use Music::Scales;
 
 use strictures 2;
 use namespace::clean;
+
+=encoding utf8
 
 =head1 SYNOPSIS
 
@@ -23,6 +25,7 @@ use namespace::clean;
   my $roman = $mtr->parse('Am');  # i (minor)
   $roman = $mtr->parse('Bo');     # iio (diminished)
   $roman = $mtr->parse('Bdim');   # iio (diminished)
+  $roman = $mtr->parse('Bø');     # iio (diminished)
   $roman = $mtr->parse('Bb');     # bII (flat-two major)
   $roman = $mtr->parse('CM');     # III (major)
   $roman = $mtr->parse('C');      # III (major)
@@ -30,6 +33,7 @@ use namespace::clean;
   $roman = $mtr->parse('Cm9/Bb'); # iii9/bii (minor ninth with flat-two bass)
   $roman = $mtr->parse('D sus4'); # IV sus4 (major suspended)
   $roman = $mtr->parse('DMaj7');  # IV maj7 (major seventh)
+  $roman = $mtr->parse('D△7');    # IV maj7 (major seventh)
   $roman = $mtr->parse('E7');     # V7 (dominant seventh)
   $roman = $mtr->parse('Em7');    # v7 (minor seventh)
   $roman = $mtr->parse('Fmin7');  # vi min7 (minor seventh)
@@ -125,7 +129,7 @@ has major_tonic => (
 =head2 chords
 
 Are we given chords to parse with major (C<M>) or minor
-(C<m>/C<o>/C<dim>) designations?
+(C<m>/C<o>/C<dim>/C<ø>) designations?
 
 Default: C<1>
 
@@ -243,7 +247,7 @@ sub parse {
     print "NOTES: @notes\n" if $self->verbose;
 
     # Convert a diminished chord
-    $chord =~ s/dim/o/; # TODO: Handle U+00F8 too
+    $chord =~ s/(?:dim|ø)/o/;
 
     # Get just the note part of the chord name
     ( my $note = $chord ) =~ s/^($note_re).*$/$1/;
@@ -278,11 +282,15 @@ sub parse {
     if ( $decorator =~ /maj/i || $decorator =~ /min/i ) {
         $decorator = lc $decorator;
     }
+    elsif ( $decorator =~ /△/ ) {
+        $decorator =~ s/△/maj/;
+    }
     else {
         # Drop the minor and major part of the chord name
         $decorator =~ s/M//i;
         $decorator =~ s/-//i;
     }
+    print "DECO: $decorator\n" if $self->verbose;
 
     # Handle these unfortunate edge cases
     $roman =~ s/#I\b/bII/;

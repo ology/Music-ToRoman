@@ -20,6 +20,7 @@ is $mtr->parse('Cadd9'), 'Iadd9', 'Iadd9';
 is $mtr->parse('C add9'), 'I add9', 'I add9';
 is $mtr->parse('CMaj7'), 'Imaj7', 'Imaj7';
 is $mtr->parse('Cmaj7'), 'Imaj7', 'Imaj7';
+is $mtr->parse('C△7'), 'Imaj7', 'Imaj7';
 is $mtr->parse('C Maj7'), 'I maj7', 'I maj7';
 is $mtr->parse('C maj7'), 'I maj7', 'I maj7';
 is $mtr->parse('C+'), 'I+', 'I+';
@@ -43,14 +44,7 @@ is $mtr->parse('Bbo'), 'bviio', 'bviio';
 is $mtr->parse('Bo'), 'viio', 'viio';
 is $mtr->parse('Bdim'), 'viio', 'viio';
 is $mtr->parse('B dim'), 'vii o', 'vii o';
-SKIP: {
-    skip 'U+25B3 works but is it needed?', 1;
-    is $mtr->parse('B △7'), 'VII △7', 'VII △7';
-};
-SKIP: {
-    skip 'U+00F8 does not mean diminished yet.', 1;
-    is $mtr->parse('Bø'), 'viio', 'viio';
-};
+is $mtr->parse('Bø'), 'viio', 'viio';
 
 diag 'C/X chords';
 
