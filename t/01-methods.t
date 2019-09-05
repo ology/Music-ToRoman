@@ -47,7 +47,7 @@ SKIP: {
 };
 SKIP: {
     skip 'U+00F8 does not mean diminished yet.', 1;
-    is $mtr->parse('Bø'), 'viiø', 'viiø';
+    is $mtr->parse('Bø'), 'viio', 'viio';
 };
 
 diag 'C/X chords';
