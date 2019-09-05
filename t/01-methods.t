@@ -140,6 +140,8 @@ is $mtr->parse('D'), 'iv', 'iv';
 is $mtr->parse('E'), 'v', 'v';
 is $mtr->parse('F'), 'VI', 'VI';
 is $mtr->parse('G'), 'VII', 'VII';
+is $mtr->parse('G#'), 'bi', 'bi';
+is $mtr->parse('Ab'), 'bi', 'bi';
 
 diag 'B locrian';
 
