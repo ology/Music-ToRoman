@@ -1,9 +1,10 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
-    - Add test cases.
     - A chord named with a "-" means "minor."
     - A chord named "maj" is not minor.
+    - Improve verbose output.
+    - Add test cases.
 
 0.1106 2019-09-03 10:52:11
     - Improve documentation.
