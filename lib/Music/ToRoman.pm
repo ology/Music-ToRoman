@@ -271,7 +271,7 @@ sub parse {
 
     # Convert the case of the roman representation based on minor or major
     if ( $self->chords ) {
-        $roman = $minor ? lc($roman) : uc($roman);
+        $roman = $minor && $decorator !~ /maj/i ? lc($roman) : uc($roman);
     }
 
     # Add any accidental found in a non-scale note
