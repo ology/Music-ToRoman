@@ -1,6 +1,14 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Improve documentation.
+    - Fix verbose output.
+    - Clean-up code:
+    - Move ugly code assignment to a new ->_get_scale_mode method.
+    - Turn the "#X" to "bY" handling into the _up_to_flat() function.
+    - Handle double accidentals when figuring out flatted note equivalents.
+
+0.1300 2019-09-05 11:46:25
     - Improve documentation!
     - Support △ (maj) and ø (diminished) in chord names.
 
