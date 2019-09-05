@@ -110,9 +110,9 @@ Note on which the C<major> scale is based.  Default: C<'C'>
 This must be an uppercase letter from C<A-G> and followed by a C<#> or
 C<b>.
 
-This attribute is required when the chord to B<parse> is a half-step
-below a double-accidental (see the note above under L</scale_note>)
-and the B<scale_name> is not C<major> (or C<ionian>).
+This attribute is required when the B<scale_note> is set to a
+double-accidental, and the B<scale_name> is not C<major> (or
+C<ionian>).
 
 =cut
 
@@ -186,9 +186,9 @@ A diminished chord may be given as either C<o> or C<dim>.
 If the B<chords> attribute is set to C<0>, the B<scale_name> is used
 to figure out the correct Roman numeral representation.
 
-If the chord to parse is a half-step below a double-accidental (see
-L</scale_note> above), and the B<scale_name> is not C<major> (or
-C<ionian>), the B<major_tonic> must be set in the constructor.
+If the B<scale_note> is a double-accidental, and the B<scale_name> is
+not C<major> (or C<ionian>), the B<major_tonic> must be set in the
+constructor.
 
 =cut
 
