@@ -205,7 +205,6 @@ sub parse {
 
     print "SCALE: @scale\n" if $self->verbose;
 
-    # Get the scale notes
     my @notes;
 
     # If the note has a double accidental and is not in major, manually rotate the scale notes, since Music::Scales does not.
