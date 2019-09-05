@@ -186,10 +186,6 @@ A diminished chord may be given as either C<o> or C<dim>.
 If the B<chords> attribute is set to C<0>, the B<scale_name> is used
 to figure out the correct Roman numeral representation.
 
-If the B<scale_note> is a double-accidental, and the B<scale_name> is
-not C<major> (or C<ionian>), the B<major_tonic> must be set in the
-constructor.
-
 =cut
 
 sub parse {
