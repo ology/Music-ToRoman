@@ -381,6 +381,7 @@ sub _pos_acc {
         ( my $letter, $accidental ) = $note =~ /^([A-G])(.+)$/;
         # Get the scale position of the closest similar note
         $position = first_index { $_ =~ /^$letter/ } @$notes;
+
         $accidental = $accidental eq '##' ? 'b' : $accidental eq 'bb' ? '#' : $accidental;
     }
 
