@@ -73,9 +73,9 @@ Note on which the scale is based.  Default: C<C>
 This must be an uppercase letter from C<A-G> either alone or followed
 by C<#> or C<b>.
 
-Note that the keys of C<A#>, C<D#>, C<E#> and C<Fb> are better
-represented by C<Gb>, C<Eb>, C<F> and C<E> respectively, because they
-contain notes with double accidentals.
+Note that the keys of C<A#> and C<D#> are better represented by C<Gb>
+and C<Eb> respectively, because the scales contain notes with double
+accidentals.
 
 =cut
 
@@ -202,30 +202,15 @@ sub parse {
     my $upper_re = qr/^[A-Z]+$/;
     my $lower_re = qr/^[a-z]+$/;
 
-    # Literal diatonic modes when chords attribute is zero
-    my @roman = qw( I ii iii IV V vi vii ); # Default to major/ionian
-    if ( $self->scale_name eq 'dorian' ) {
-        @roman = qw( i ii III IV v vi VII );
-    }
-    elsif ( $self->scale_name eq 'phrygian' ) {
-        @roman = qw( i II III iv v VI vii );
-    }
-    elsif ( $self->scale_name eq 'lydian' ) {
-        @roman = qw( I II iii iv V vi vii );
-    }
-    elsif ( $self->scale_name eq 'mixolydian' ) {
-        @roman = qw( I ii iii IV v vi VII );
-    }
-    elsif ( $self->scale_name eq 'minor' || $self->scale_name eq 'aeolian' ) {
-        @roman = qw( i ii III iv v VI VII );
-    }
-    elsif ( $self->scale_name eq 'locrian' ) {
-        @roman = qw( i II iii iv V VI vii );
-    }
-    print "ROMAN: @roman\n" if $self->verbose;
+    # Get the roman representation of the scale
+    my @scale = $self->_get_scale_mode; # Default to major/ionian
+
+    print "SCALE: @scale\n" if $self->verbose;
 
     # Get the scale notes
     my @notes;
+
+    # If the note has a double accidental and is not in major, manually rotate the scale notes, since Music::Scales does not.
     if ( ( $self->scale_note =~ /##/ || $self->scale_note =~ /bb/ ) && $self->scale_name ne 'major' && $self->scale_name ne 'ionian' ) {
         my %modes = (
             dorian     => 2,
@@ -239,6 +224,7 @@ sub parse {
 
         @notes = get_scale_notes( $self->major_tonic, 'major' );
 
+        # Rotate the major scale to the correct mode
         push @notes, shift @notes for 1 .. $modes{ $self->scale_name } - 1;
     }
     else {
@@ -254,13 +240,15 @@ sub parse {
 
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
+
     # If the note is not in the scale find a new position and accidental
     my $accidental;
     if ( $position == -1 ) {
         ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
     }
     $accidental ||= '';
-    my $roman = $roman[$position];
+
+    my $roman = $scale[$position];
     print "ROMAN 1: $roman\n" if $self->verbose;
 
     # Get everything but the note part
@@ -268,7 +256,7 @@ sub parse {
 
     # Are we minor or diminished?
     my $minor = $decorator =~ /[-mo]/ ? 1 : 0;
-    print "NOTE: $note, MINOR: $minor, CHORD: $chord, POSN: $position, ACCI: $accidental, DECO: $decorator\n" if $self->verbose;
+    print "CHORD: $chord, NOTE: $note, ACCI: $accidental, DECO: $decorator, MINOR: $minor, POSN: $position\n" if $self->verbose;
 
     # Convert the case of the roman representation based on minor or major
     if ( $self->chords ) {
@@ -279,6 +267,11 @@ sub parse {
     $roman = $accidental . $roman if $accidental;
     print "ROMAN 2: $roman\n" if $self->verbose;
 
+    # Handle these unfortunate edge cases:
+    $roman = _up_to_flat( $roman, \@scale );
+    print "ROMAN 3: $roman\n" if $self->verbose;
+
+    # Handle the decorator variations
     if ( $decorator =~ /maj/i || $decorator =~ /min/i ) {
         $decorator = lc $decorator;
     }
@@ -287,69 +280,29 @@ sub parse {
     }
     else {
         # Drop the minor and major part of the chord name
-        $decorator =~ s/M//i;
-        $decorator =~ s/-//i;
+        $decorator =~ s/[-Mm]//i;
     }
     print "DECO: $decorator\n" if $self->verbose;
-
-    # Handle these unfortunate edge cases
-    $roman =~ s/#I\b/bII/;
-    $roman =~ s/#i\b/bii/;
-    $roman =~ s/#II\b/bIII/;
-    $roman =~ s/#ii\b/biii/;
-    $roman =~ s/#IV\b/bV/;
-    $roman =~ s/#iv\b/bv/;
-    $roman =~ s/#V\b/bVI/;
-    $roman =~ s/#v\b/bvi/;
-    $roman =~ s/#VI\b/bVII/;
-    $roman =~ s/#vi\b/bvii/;
-    print "ROMAN 3: $roman\n" if $self->verbose;
 
     # A remaining note name is a bass decorator
     if ( $decorator =~ /($note_re)/ ) {
         my $name = $1;
+
         $position = first_index { $_ eq $name } @notes;
         print "BASS NOTE: $name, POSN: $position\n" if $self->verbose;
+
         if ( $position >= 0 ) {
-            $decorator =~ s/$note_re/$roman[$position]/;
+            $decorator =~ s/$note_re/$scale[$position]/;
         }
         else {
             ( $position, $accidental ) = _pos_acc( $name, $position, \@notes );
             print "NEW POSN: $position, ACCI: $accidental\n" if $self->verbose;
-            my $bass = $accidental . $roman[$position];
+
+            my $bass = $accidental . $scale[$position];
             $decorator =~ s/$note_re/$bass/;
 
             # Handle these unfortunate edge cases
-            if ( $decorator =~ /#I\b/i && $roman[1] =~ /$upper_re/ ) {
-                $decorator =~ s/#I\b/bII/i;
-            }
-            elsif ( $decorator =~ /#I\b/i && $roman[1] =~ /$lower_re/ ) {
-                $decorator =~ s/#I\b/bii/i;
-            }
-            elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /$upper_re/ ) {
-                $decorator =~ s/#II\b/bIII/i;
-            }
-            elsif ( $decorator =~ /#II\b/i && $roman[2] =~ /$lower_re/ ) {
-                $decorator =~ s/#II\b/biii/i;
-            }
-            elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /$upper_re/ ) {
-                $decorator =~ s/#IV\b/bV/i;
-            }
-            elsif ( $decorator =~ /#IV\b/i && $roman[4] =~ /$lower_re/ ) {
-                $decorator =~ s/#IV\b/bv/i;
-            }
-            elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /$upper_re/ ) {
-                $decorator =~ s/#V\b/bVI/i;
-            }
-            elsif ( $decorator =~ /#V\b/i && $roman[5] =~ /$lower_re/ ) {
-                $decorator =~ s/#V\b/bvi/i;
-            }
-            elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /$upper_re/ ) {
-                $decorator =~ s/#VI\b/bVII/i;
-            }
-            elsif ( $decorator =~ /#VI\b/i && $roman[6] =~ /$lower_re/ ) {
-                $decorator =~ s/#VI\b/bvii/i;
-            }
+            $decorator = _up_to_flat( $decorator, \@scale );
         }
         print "NEW DECO: $decorator\n" if $self->verbose;
     }
@@ -361,6 +314,42 @@ sub parse {
     return $roman;
 }
 
+sub _get_scale_mode {
+    my ($self) = @_;
+
+    my @scale = qw( I ii iii IV V vi vii ); # Default to major/ionian
+
+    if ( $self->scale_name eq 'dorian' ) {
+        @scale = qw( i ii III IV v vi VII );
+    }
+    elsif ( $self->scale_name eq 'phrygian' ) {
+        @scale = qw( i II III iv v VI vii );
+    }
+    elsif ( $self->scale_name eq 'lydian' ) {
+        @scale = qw( I II iii iv V vi vii );
+    }
+    elsif ( $self->scale_name eq 'mixolydian' ) {
+        @scale = qw( I ii iii IV v vi VII );
+    }
+    elsif ( $self->scale_name eq 'minor' || $self->scale_name eq 'aeolian' ) {
+        @scale = qw( i ii III iv v VI VII );
+    }
+    elsif ( $self->scale_name eq 'locrian' ) {
+        @scale = qw( i II iii iv V VI vii );
+    }
+
+    return @scale;
+}
+
+sub _up_to_flat {
+    my ($numeral, $roman) = @_;
+
+    # Change a roman sharp to a flat of the succeeding scale position
+    $numeral =~ s/#([IV]+)/b$roman->[ ( ( first_index { lc($1) eq lc($_) } @$roman ) + 1 ) % @$roman ]/i;
+
+    return $numeral;
+};
+
 sub _pos_acc {
     my ( $note, $position, $notes ) = @_;
 
@@ -368,18 +357,31 @@ sub _pos_acc {
 
     # If the note has no accidental...
     if ( length($note) == 1 ) {
-        # Find the scale position of the closest note
-        $position = first_index { $_ =~ /$note/ } @$notes;
+        # Find the scale position of the closest similar note
+        $position = first_index { $_ =~ /^$note/ } @$notes;
         # Get the accidental of the scale note
         ( $accidental = $notes->[$position] ) =~ s/^[A-G](.)$/$1/;
         # TODO: Why?
         $accidental = $accidental eq '#' ? 'b' : '#';
     }
     else {
+        # Enharmonic double accidental equivalents
+        my %previous_enharmonics = (
+            'C#' => 'C##',
+            'Db' => 'C##',
+            'F#' => 'F##',
+            'Gb' => 'F##',
+            'G#' => 'G##',
+            'Ab' => 'G##',
+        );
+        $note = $previous_enharmonics{$note}
+            if exists $previous_enharmonics{$note} && any { $_ =~ /[CFG](?:bb|##)/ } @$notes;
+
         # Get the accidental of the given note
-        ( my $letter, $accidental ) = $note =~ /^([A-G])(.)$/;
-        # Get the scale position of the closest note
-        $position = first_index { $_ eq $letter } @$notes;
+        ( my $letter, $accidental ) = $note =~ /^([A-G])(.+)$/;
+        # Get the scale position of the closest similar note
+        $position = first_index { $_ =~ /^$letter/ } @$notes;
+        $accidental = $accidental eq '##' ? 'b' : $accidental eq 'bb' ? '#' : $accidental;
     }
 
     return $position, $accidental;
@@ -438,5 +440,9 @@ L<Music::BachChoralHarmony>.
 
 L<App::MusicTools> C<vov> is the reverse of this module, and is
 significantly powerful.
+
+=head1 THANK YOU
+
+Dan Book L<DBOOK|https://metacpan.org/author/DBOOK> for the list rotation logic
 
 =cut
