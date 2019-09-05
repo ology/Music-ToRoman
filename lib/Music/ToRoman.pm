@@ -247,7 +247,7 @@ sub parse {
     print "NOTES: @notes\n" if $self->verbose;
 
     # Convert a diminished chord
-    $chord =~ s/dim/o/;
+    $chord =~ s/dim/o/; # TODO: Handle U+00F8 too
 
     # Get just the note part of the chord name
     ( my $note = $chord ) =~ s/^($note_re).*$/$1/;
@@ -266,7 +266,7 @@ sub parse {
     ( my $decorator = $chord ) =~ s/^(?:$note_re)(.*)$/$1/;
 
     # Are we minor or diminished?
-    my $minor = $decorator =~ /[mo]/ ? 1 : 0;
+    my $minor = $decorator =~ /[-mo]/ ? 1 : 0;
     print "NOTE: $note, CHORD: $chord, POSN: $position, ACCI: $accidental, ROMAN: $roman, DECO: $decorator\n" if $self->verbose;
 
     # Convert the case of the roman representation based on minor or major
@@ -283,6 +283,7 @@ sub parse {
     else {
         # Drop the minor and major part of the chord name
         $decorator =~ s/M//i;
+        $decorator =~ s/-//i;
     }
 
     # Handle these unfortunate edge cases
