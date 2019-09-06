@@ -1,6 +1,9 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Improve and correct documentation.
+
+0.1400 2019-09-05 18:42:18
     - Improve documentation.
     - Fix verbose output.
     - Add test cases and remove skipping.
