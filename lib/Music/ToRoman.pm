@@ -53,9 +53,9 @@ use namespace::clean;
   $roman = $mtr->parse('E');      # v
   $roman = $mtr->parse('F#');     # vi
   $roman = $mtr->parse('G');      # VII
-  $roman = $mtr->parse('Amin7');  # i min7
+  $roman = $mtr->parse('Amin7');  # imin7
   $roman = $mtr->parse('Bo');     # iio
-  $roman = $mtr->parse('CMaj7');  # III maj7
+  $roman = $mtr->parse('CMaj7');  # IIImaj7
   $roman = $mtr->parse('D7');     # IV7
   $roman = $mtr->parse('Em');     # v
 
