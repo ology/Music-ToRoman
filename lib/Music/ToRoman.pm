@@ -75,7 +75,7 @@ by C<#> or C<b>.
 
 Note that the keys of C<A#> and C<D#> are better represented by C<Gb>
 and C<Eb> respectively, because the scales contain notes with double
-accidentals.
+sharps.  Double flat scales are not supprted.
 
 =cut
 
@@ -115,8 +115,9 @@ This must be an uppercase letter from C<A-G> and followed by a C<#> or
 C<b>.
 
 This attribute is required when the B<scale_note> is set to a
-double-accidental, and the B<scale_name> is not C<major> (or
-C<ionian>).
+double-sharp, and the B<scale_name> is not C<major> (or C<ionian>).
+
+Again, double flat scales are not supprted.
 
 =cut
 
@@ -179,7 +180,7 @@ For instance, the Roman numeral representation for the C<aeolian> (or
 minor) mode is: C<i ii III iv v VI VII> - where the case indicates the
 major/minor status of the given chord.
 
-This can be overridden by parsing say, C<BM7> (B dominant seventh),
+This can be overridden by parsing say, C<B7> (B dominant seventh),
 thus producing C<II7>.
 
 If a major/minor chord designation is not provided, C<M> major is
@@ -189,6 +190,8 @@ A diminished chord may be given as either C<o> or C<dim>.
 
 If the B<chords> attribute is set to C<0>, the B<scale_name> is used
 to figure out the correct Roman numeral representation.
+
+Trying to parse a double flatted chord will not work.
 
 =cut
 
@@ -207,8 +210,8 @@ sub parse {
 
     my @notes;
 
-    # If the note has a double accidental and is not in major, manually rotate the scale notes, since Music::Scales does not.
-    if ( ( $self->scale_note =~ /##/ || $self->scale_note =~ /bb/ ) && $self->scale_name ne 'major' && $self->scale_name ne 'ionian' ) {
+    # If the note has a double sharp and is not in major, manually rotate the scale notes, since Music::Scales does not.
+    if ( $self->scale_note =~ /##/ && $self->scale_name ne 'major' && $self->scale_name ne 'ionian' ) {
         my %modes = (
             dorian     => 2,
             phrygian   => 3,
@@ -362,7 +365,7 @@ sub _pos_acc {
         $accidental = $accidental eq '#' ? 'b' : '#';
     }
     else {
-        # Enharmonic double accidental equivalents
+        # Enharmonic double sharp equivalents
         my %previous_enharmonics = (
             'C#' => 'C##',
             'Db' => 'C##',
@@ -372,14 +375,14 @@ sub _pos_acc {
             'Ab' => 'G##',
         );
         $note = $previous_enharmonics{$note}
-            if exists $previous_enharmonics{$note} && any { $_ =~ /[CFG](?:bb|##)/ } @$notes;
+            if exists $previous_enharmonics{$note} && any { $_ =~ /[CFG]##/ } @$notes;
 
         # Get the accidental of the given note
         ( my $letter, $accidental ) = $note =~ /^([A-G])(.+)$/;
         # Get the scale position of the closest similar note
         $position = first_index { $_ =~ /^$letter/ } @$notes;
 
-        $accidental = $accidental eq '##' ? 'b' : $accidental eq 'bb' ? '#' : $accidental;
+        $accidental = $accidental eq '##' ? 'b' : $accidental;
     }
 
     return $position, $accidental;
@@ -396,7 +399,6 @@ sub _valid_note {
     push @valid, map { $_ . '#' } @notes;
     push @valid, map { $_ . '##' } @notes;
     push @valid, map { $_ . 'b' } @notes;
-    push @valid, map { $_ . 'bb' } @notes;
 
     return any { $_ eq $note } @valid;
 }
