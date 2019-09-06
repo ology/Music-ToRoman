@@ -209,7 +209,6 @@ sub parse {
 
     # Get the roman representation of the scale
     my @scale = $self->_get_scale_mode;
-
     print "SCALE: @scale\n" if $self->verbose;
 
     my @notes;
