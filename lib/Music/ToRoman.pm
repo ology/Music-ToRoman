@@ -188,12 +188,12 @@ thus producing C<II7>.
 If a major/minor chord designation is not provided, C<M> major is
 assumed.
 
+If the B<chords> attribute is set to C<0>, the B<scale_name> is used
+to figure out the correct Roman numeral representation.
+
 A diminished chord may be given as either C<o> or C<dim>.
 Half-diminished (C<m7b5>) chords can be given as C<ø>.  A decoration
 of C<△> may be given for say the C<△7> major seventh chord.
-
-If the B<chords> attribute is set to C<0>, the B<scale_name> is used
-to figure out the correct Roman numeral representation.
 
 Trying to parse a double flatted chord will not work.
 
