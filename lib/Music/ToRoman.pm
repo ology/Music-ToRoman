@@ -23,20 +23,21 @@ use namespace::clean;
   );
 
   my $roman = $mtr->parse('Am');  # i (minor)
-  $roman = $mtr->parse('Bo');     # iio (diminished)
   $roman = $mtr->parse('Bdim');   # iio (diminished)
-  $roman = $mtr->parse('Bø');     # iio (diminished)
+  $roman = $mtr->parse('B dim');  # ii o "
+  $roman = $mtr->parse('Bo');     # iio "
+  $roman = $mtr->parse('Bø');     # iio "
   $roman = $mtr->parse('Bb');     # bII (flat-two major)
   $roman = $mtr->parse('CM');     # III (major)
-  $roman = $mtr->parse('C');      # III (major)
+  $roman = $mtr->parse('C');      # III "
   $roman = $mtr->parse('Cm9/G');  # iii9/VII (minor ninth with seven bass)
   $roman = $mtr->parse('Cm9/Bb'); # iii9/bii (minor ninth with flat-two bass)
   $roman = $mtr->parse('D sus4'); # IV sus4 (major suspended)
-  $roman = $mtr->parse('DMaj7');  # IV maj7 (major seventh)
-  $roman = $mtr->parse('D△7');    # IV maj7 (major seventh)
+  $roman = $mtr->parse('DMaj7');  # IVmaj7 (major seventh)
+  $roman = $mtr->parse('D△7');    # IV maj7 "
   $roman = $mtr->parse('E7');     # V7 (dominant seventh)
   $roman = $mtr->parse('Em7');    # v7 (minor seventh)
-  $roman = $mtr->parse('Fmin7');  # vi min7 (minor seventh)
+  $roman = $mtr->parse('Fmin7');  # vimin7 "
   $roman = $mtr->parse('G+');     # VII+ (augmented)
 
   $mtr = Music::ToRoman->new(
