@@ -75,7 +75,7 @@ by C<#> or C<b>.
 
 Note that the keys of C<A#> and C<D#> are better represented by C<Gb>
 and C<Eb> respectively, because the scales contain notes with double
-sharps.  Double flat scales are not supprted.
+sharps.  Double flat scales are not supported.
 
 =cut
 
