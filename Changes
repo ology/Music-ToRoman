@@ -1,6 +1,8 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+
+0.1500 2019-09-05 19:46:15
     - Improve documentation.
     - Handle the half-diminished chord correctly.
 
