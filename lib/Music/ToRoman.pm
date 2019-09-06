@@ -205,7 +205,7 @@ sub parse {
     die 'No chord to parse'
         unless $chord;
 
-    my $note_re  = qr/[A-G][#b]?#?/;
+    my $note_re = qr/[A-G][#b]?#?/;
 
     # Get the roman representation of the scale
     my @scale = $self->_get_scale_mode;
