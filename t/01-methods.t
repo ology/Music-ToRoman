@@ -20,6 +20,7 @@ is $mtr->parse('Cadd9'), 'Iadd9', 'Iadd9';
 is $mtr->parse('C add9'), 'I add9', 'I add9';
 is $mtr->parse('CMaj7'), 'Imaj7', 'Imaj7';
 is $mtr->parse('Cmaj7'), 'Imaj7', 'Imaj7';
+is $mtr->parse('C maj7'), 'I maj7', 'I maj7';
 is $mtr->parse('C△7'), 'Imaj7', 'Imaj7';
 is $mtr->parse('C Maj7'), 'I maj7', 'I maj7';
 is $mtr->parse('C maj7'), 'I maj7', 'I maj7';
