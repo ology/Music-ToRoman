@@ -46,7 +46,7 @@ is $mtr->parse('Bbo'), 'bviio', 'bviio';
 is $mtr->parse('Bo'), 'viio', 'viio';
 is $mtr->parse('Bdim'), 'viio', 'viio';
 is $mtr->parse('B dim'), 'vii o', 'vii o';
-is $mtr->parse('Bø'), 'viio', 'viio';
+is $mtr->parse('Bø'), 'vii7b5', 'vii7b5';
 
 diag 'C/X chords';
 

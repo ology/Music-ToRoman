@@ -26,7 +26,7 @@ use namespace::clean;
   $roman = $mtr->parse('Bdim');   # iio (diminished)
   $roman = $mtr->parse('B dim');  # ii o
   $roman = $mtr->parse('Bo');     # iio
-  $roman = $mtr->parse('Bø');     # iio
+  $roman = $mtr->parse('Bø');     # ii7b5 (half-diminished)
   $roman = $mtr->parse('Bb');     # bII (flat-two major)
   $roman = $mtr->parse('CM');     # III (major)
   $roman = $mtr->parse('C');      # III
@@ -235,7 +235,7 @@ sub parse {
     print "NOTES: @notes\n" if $self->verbose;
 
     # Convert a diminished chord
-    $chord =~ s/(?:dim|ø)/o/;
+    $chord =~ s/dim/o/;
 
     # Get just the note part of the chord name
     ( my $note = $chord ) =~ s/^($note_re).*$/$1/;
@@ -257,7 +257,7 @@ sub parse {
     ( my $decorator = $chord ) =~ s/^(?:$note_re)(.*)$/$1/;
 
     # Are we minor or diminished?
-    my $minor = $decorator =~ /[-mo]/ ? 1 : 0;
+    my $minor = $decorator =~ /[-moø]/ ? 1 : 0;
     print "CHORD: $chord, NOTE: $note, ACCI: $accidental, DECO: $decorator, MINOR: $minor, POSN: $position\n" if $self->verbose;
 
     # Convert the case of the roman representation based on minor or major
@@ -279,6 +279,9 @@ sub parse {
     }
     elsif ( $decorator =~ /△/ ) {
         $decorator =~ s/△/maj/;
+    }
+    elsif ( $decorator =~ /ø/ ) {
+        $decorator =~ s/ø/7b5/;
     }
     else {
         # Drop the minor and major part of the chord name
