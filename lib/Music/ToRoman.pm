@@ -117,7 +117,7 @@ C<b>.
 This attribute is required when the B<scale_note> is set to a
 double-sharp, and the B<scale_name> is not C<major> (or C<ionian>).
 
-Again, double flat scales are not supprted.
+Again, double flat scales are not supported.
 
 =cut
 
