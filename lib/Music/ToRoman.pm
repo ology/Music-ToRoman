@@ -195,7 +195,7 @@ A diminished chord may be given as either C<o> or C<dim>.
 Half-diminished (C<m7b5>) chords can be given as C<ø>.  A decoration
 of C<△> may be given for say the C<△7> major seventh chord.
 
-Trying to parse a double flatted chord will not work.
+Parsing a double flatted chord will only work in select cases.
 
 =cut
 
@@ -205,7 +205,7 @@ sub parse {
     die 'No chord to parse'
         unless $chord;
 
-    my $note_re = qr/[A-G][#b]?#?/;
+    my $note_re = qr/[A-G][#b]?[#b]?/;
 
     # Get the roman representation of the scale
     my @scale = $self->_get_scale_mode;
@@ -240,6 +240,19 @@ sub parse {
 
     # Get just the note part of the chord name
     ( my $note = $chord ) =~ s/^($note_re).*$/$1/;
+
+    my %bb_enharmonics = (
+        Cbb => 'Bb', #[qw/ Bb A# /],
+        Dbb => 'C',  #[qw/ C B# /],
+        Ebb => 'D',  #[qw/ D /],
+        Fbb => 'Eb', #[qw/ Eb D# /],
+        Gbb => 'F',  #[qw/ F /],
+        Abb => 'G',  #[qw/ G /],
+        Bbb => 'A',  #[qw/ A /],
+    );
+
+    $note = $bb_enharmonics{$note}
+        if $note =~ /bb$/;
 
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
