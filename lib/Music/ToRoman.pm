@@ -285,6 +285,7 @@ sub parse {
 
     # Handle these unfortunate edge cases:
     $roman = _up_to_flat( $roman, \@scale );
+#    $roman =~ s/^biv/iii/; # TODO Related half-step substitutions?
     print "ROMAN 3: $roman\n" if $self->verbose;
 
     # Handle the decorator variations
