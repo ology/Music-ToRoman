@@ -11,6 +11,11 @@ diag 'C chords';
 my $mtr = Music::ToRoman->new;#( verbose => 1 );
 isa_ok $mtr, 'Music::ToRoman';
 
+is $mtr->parse('Dbb'), 'I', 'I';
+is $mtr->parse('Ebbm'), 'ii', 'ii';
+is $mtr->parse('Gbb'), 'IV', 'IV';
+is $mtr->parse('Abb'), 'V', 'V';
+
 is $mtr->parse('C'), 'I', 'I';
 is $mtr->parse('CM'), 'I', 'I';
 is $mtr->parse('C-'), 'i', 'i';
