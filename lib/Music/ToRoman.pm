@@ -448,6 +448,7 @@ significantly powerful.
 
 =head1 THANK YOU
 
-Dan Book L<DBOOK|https://metacpan.org/author/DBOOK> for the list rotation logic
+Dan Book (L<DBOOK|https://metacpan.org/author/DBOOK>) for the list
+rotation logic
 
 =cut
