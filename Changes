@@ -1,8 +1,10 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+
+0.1600 2019-09-06 10:29:40
     - Improve documentation.
-    - Make double-flatted chord parsing work for cetain cases.
+    - Make double-flatted chord parsing work for certain cases.
 
 0.1500 2019-09-05 19:46:15
     - Improve documentation.
