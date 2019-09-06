@@ -257,7 +257,7 @@ sub parse {
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
 
-    # If the note is not in the scale find a new position and accidental
+    # If the note is not in the scale find the new position and accidental
     my $accidental;
     if ( $position == -1 ) {
         ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
@@ -272,7 +272,7 @@ sub parse {
 
     # Are we minor or diminished?
     my $minor = $decorator =~ /[-moø]/ ? 1 : 0;
-    print "CHORD: $chord, NOTE: $note, ACCI: $accidental, DECO: $decorator, MINOR: $minor, POSN: $position\n" if $self->verbose;
+    print "CHORD: $chord, NOTE: $note, NEW ACCI: $accidental, DECO: $decorator, MINOR: $minor, POSN: $position\n" if $self->verbose;
 
     # Convert the case of the roman representation based on minor or major
     if ( $self->chords ) {
@@ -382,7 +382,7 @@ sub _pos_acc {
         # Get the accidental of the scale note
         ( $accidental = $notes->[$position] ) =~ s/^[A-G](.)$/$1/;
 
-        # TODO: Why?
+        # TODO: Explain why.
         $accidental = $accidental eq '#' ? 'b' : '#';
     }
     else {
