@@ -463,6 +463,8 @@ L<List::MoreUtils>
 
 L<Moo>
 
+L<Music::Note>
+
 L<Music::Scales>
 
 L<https://en.wikipedia.org/wiki/Roman_numeral_analysis>
