@@ -12,22 +12,9 @@ use_ok 'Music::ToRoman';
 
 my @notes = qw/ C D E F G A B /;
 my @modes = qw/ I ii iii IV V vi vii /;
-my %equiv = (
-    i   => 1,
-    I   => 1,
-    ii  => 2,
-    II  => 2,
-    iii => 3,
-    III => 3,
-    iv  => 4,
-    IV  => 4,
-    v   => 5,
-    V   => 5,
-    vi  => 6,
-    VI  => 6,
-    vii => 7,
-    VII => 7,
-);
+my %equiv;
+@equiv{qw/ i ii iii iv v vi vii /} = 1 .. 7;
+@equiv{qw/ I II III IV V VI VII /} = 1 .. 7;
 
 my $i = 0;
 for my $scale_note ( @notes ) {
