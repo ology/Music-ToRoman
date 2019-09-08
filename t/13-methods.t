@@ -13,8 +13,8 @@ use_ok 'Music::ToRoman';
 my @notes = qw/ C D E F G A B /;
 my @modes = qw/ I ii iii IV V vi vii /;
 my %equiv;
-@equiv{qw/ i ii iii iv v vi vii /} = 1 .. 7;
-@equiv{qw/ I II III IV V VI VII /} = 1 .. 7;
+@equiv{ map { lc } @modes } = 1 .. 7;
+@equiv{ map { uc } @modes } = 1 .. 7;
 
 my $i = 0;
 for my $scale_note ( @notes ) {
