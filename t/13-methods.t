@@ -10,11 +10,11 @@ use Test::More;
 
 use_ok 'Music::ToRoman';
 
-my @notes = qw/ C D E F G A B /;
+my @notes = qw/ C D  E   F  G A  B /;
 my @modes = qw/ I ii iii IV V vi vii /;
 my %equiv;
-@equiv{ map { lc } @modes } = 1 .. 7;
-@equiv{ map { uc } @modes } = 1 .. 7;
+@equiv{ map { lc } @modes } = 1 .. @modes;
+@equiv{ map { uc } @modes } = 1 .. @modes;
 
 my $i = 0;
 for my $scale_note ( @notes ) {
