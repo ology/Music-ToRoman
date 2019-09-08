@@ -6,6 +6,7 @@ our $VERSION = '0.1600';
 
 use List::MoreUtils qw/ any first_index /;
 use Moo;
+use Music::Note;
 use Music::Scales;
 
 use strictures 2;
@@ -257,9 +258,19 @@ sub parse {
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
 
+    my $accidental = '';
+    if ( $position < 0 && $note =~ /[#b]+$/ ) {
+        my $n = Music::Note->new( $note, 'isobase' );
+        my $name = $n->format('isobase');
+        ( $accidental = $name ) =~ s/^[A-G]([#b]+)$/$1/;
+        $n->en_eq( $accidental =~ /^#/ ? 'b' : '#' );
+        $note = $n->format('isobase');
+        $position = first_index { $_ eq $note } @notes;
+        $accidental = '';
+    }
+
     # If the note is not in the scale find the new position and accidental
-    my $accidental;
-    if ( $position == -1 ) {
+    if ( $position < 0 ) {
         ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
     }
     $accidental ||= '';
