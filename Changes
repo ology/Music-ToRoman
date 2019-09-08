@@ -2,6 +2,7 @@ Revision history for Music-ToRoman
 
 {{$NEXT}}
     - Look for enharmonic notes who's counterpart is not found in the scale.
+    - Add an iterative test of the whole note modes.
 
 0.1600 2019-09-06 10:29:40
     - Improve documentation.
