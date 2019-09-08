@@ -29,8 +29,6 @@ my %equiv = (
     VII => 7,
 );
 
-@equiv{@modes} = 1 .. 7;
-
 my $i = 0;
 for my $scale_note ( @notes ) {
     diag "scale_note: $scale_note";
