@@ -236,6 +236,18 @@ sub parse {
     }
     print "NOTES: @notes\n" if $self->verbose;
 
+# XXX Not working?
+#    my %ss_enharmonics = (
+#        'C##' => 'D',
+#        'D##' => 'E',
+#        'F##' => 'G',
+#        'G##' => 'A',
+#    );
+#    for ( @notes ) {
+#        s/$_/$ss_enharmonics{$_}/
+#            if $ss_enharmonics{$_};
+#    }
+
     # Convert a diminished chord
     $chord =~ s/dim/o/;
 
@@ -258,7 +270,23 @@ sub parse {
     # Get the roman representation based on the scale position
     my $position = first_index { $_ eq $note } @notes;
 
+    if ( $position < 0 && ( $note eq 'Cb' || $note eq 'Fb' ) ) {
+        $note = 'B'
+            if $note eq 'Cb';
+        $note = 'E'
+            if $note eq 'Fb';
+        $position = first_index { $_ eq $note } @notes;
+    }
+    elsif ( $note eq 'E#' ) {
+        $note = 'F';
+    }
+
     my $accidental = '';
+    # If the note is not in the scale find the new position and accidental
+    if ( $position < 0 ) {
+        ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
+    }
+
     if ( $position < 0 && $note =~ /[#b]+$/ ) {
         my $n = Music::Note->new( $note, 'isobase' );
         my $name = $n->format('isobase');
@@ -268,12 +296,6 @@ sub parse {
         $position = first_index { $_ eq $note } @notes;
         $accidental = '';
     }
-
-    # If the note is not in the scale find the new position and accidental
-    if ( $position < 0 ) {
-        ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
-    }
-    $accidental ||= '';
 
     my $roman = $scale[$position];
     print "ROMAN 1: $roman\n" if $self->verbose;
