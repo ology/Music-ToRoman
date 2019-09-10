@@ -152,7 +152,7 @@ has chords => (
 
 Show the progress of the B<parse> method.
 
-Default C<0>
+Default: C<0>
 
 =cut
 
