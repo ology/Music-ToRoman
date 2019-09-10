@@ -39,6 +39,8 @@ my %expected = (
     'Cb' => 'I',
 );
 
+my %values = ();
+
 for my $scale_note ( 'Cb' ) {
     diag "scale_note: $scale_note";
 
@@ -56,12 +58,11 @@ for my $scale_note ( 'Cb' ) {
             my $roman = $mtr->parse($note);
             is $expected{$note}, $roman, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-my %values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -90,6 +91,8 @@ for my $roman ( @romans ) {
     'Cb' => 'bvii',
 );
 
+%values = ();
+
 for my $scale_note ( 'Db' ) {
     diag "scale_note: $scale_note";
 
@@ -107,12 +110,11 @@ for my $scale_note ( 'Db' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -141,6 +143,8 @@ for my $roman ( @romans ) {
     'Cb' => 'bvi', # 
 );
 
+%values = ();
+
 for my $scale_note ( 'Eb' ) {
     diag "scale_note: $scale_note";
 
@@ -158,12 +162,11 @@ for my $scale_note ( 'Eb' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -192,6 +195,8 @@ for my $roman ( @romans ) {
     'Cb' => 'V', # 
 );
 
+%values = ();
+
 for my $scale_note ( 'Fb' ) {
     diag "scale_note: $scale_note";
 
@@ -209,17 +214,16 @@ for my $scale_note ( 'Fb' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
 SKIP: {
     skip 'Double flat in scale', scalar(@romans);
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
-for my $roman ( @romans ) {
-    ok exists $values{$roman}, "$roman present";
-}
+    for my $roman ( @romans ) {
+        ok exists $values{$roman}, "$roman present";
+    }
 };
 
 %expected = (
@@ -231,7 +235,7 @@ for my $roman ( @romans ) {
     'Eb' => 'vi', # 
     'E'  => 'bvii', # 
     'Fb' => 'bvii', # 
-    'E#' => 'bI', # *
+    'E#' => 'vii', # *
     'F'  => 'vii', # 
     'F#' => '', # I
     'Gb' => 'I', # 
@@ -245,6 +249,8 @@ for my $roman ( @romans ) {
     'B#' => '', # bV
     'Cb' => 'IV', # 
 );
+
+%values = ();
 
 for my $scale_note ( 'Gb' ) {
     diag "scale_note: $scale_note";
@@ -263,12 +269,11 @@ for my $scale_note ( 'Gb' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -297,6 +302,8 @@ for my $roman ( @romans ) {
     'Cb' => 'biii', # 
 );
 
+%values = ();
+
 for my $scale_note ( 'Ab' ) {
     diag "scale_note: $scale_note";
 
@@ -314,12 +321,11 @@ for my $scale_note ( 'Ab' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -348,6 +354,8 @@ for my $roman ( @romans ) {
     'Cb' => 'bii', # 
 );
 
+%values = ();
+
 for my $scale_note ( 'Bb' ) {
     diag "scale_note: $scale_note";
 
@@ -365,12 +373,11 @@ for my $scale_note ( 'Bb' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }

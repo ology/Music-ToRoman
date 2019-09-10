@@ -35,9 +35,11 @@ my %expected = (
     'A#' => 'bvii',
     'Bb' => 'bvii',
     'B'  => 'vii',
-    'B#' => 'bI',
+    'B#' => 'vii',
     'Cb' => 'vii',
 );
+
+my %values = ();
 
 for my $scale_note ( 'C' ) {
     diag "scale_note: $scale_note";
@@ -55,12 +57,11 @@ for my $scale_note ( 'C' ) {
         for my $note ( @notes ) {
             my $roman = $mtr->parse($note);
             is $expected{$note}, $roman, "parsed $note => $roman";
+            $values{$roman} = undef;
         }
     }
 }
 
-my %values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -68,7 +69,7 @@ for my $roman ( @romans ) {
 %expected = (
     'C'  => 'bvii',
     'C#' => 'vii',
-    'Db' => 'bI',
+    'Db' => 'vii',
     'D'  => 'I',
     'D#' => 'bii',
     'Eb' => 'bii',
@@ -77,7 +78,7 @@ for my $roman ( @romans ) {
     'E#' => 'biii',
     'F'  => 'biii',
     'F#' => 'iii',
-    'Gb' => 'bIV',
+    'Gb' => 'iii',
     'G'  => 'IV',
     'G#' => 'bV',
     'Ab' => 'bV',
@@ -88,6 +89,8 @@ for my $roman ( @romans ) {
     'B#' => 'bvii',
     'Cb' => 'vi',
 );
+
+%values = ();
 
 for my $scale_note ( 'D' ) {
     diag "scale_note: $scale_note";
@@ -105,12 +108,11 @@ for my $scale_note ( 'D' ) {
         for my $note ( @notes ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman";
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -121,7 +123,7 @@ for my $roman ( @romans ) {
     'Db' => '', # vi
     'D'  => 'bvii',
     'D#' => 'vii',
-    'Eb' => 'bI',
+    'Eb' => 'vii',
     'E'  => 'I',
     'Fb' => 'I',
     'E#' => 'bii',
@@ -130,7 +132,7 @@ for my $roman ( @romans ) {
     'Gb' => '', # ii
     'G'  => 'biii',
     'G#' => 'iii',
-    'Ab' => 'bIV',
+    'Ab' => 'iii',
     'A'  => 'IV',
     'A#' => 'bV',
     'Bb' => 'bV',
@@ -138,6 +140,8 @@ for my $roman ( @romans ) {
     'B#' => 'bvi',
     'Cb' => 'V',
 );
+
+%values = ();
 
 for my $scale_note ( 'E' ) {
     diag "scale_note: $scale_note";
@@ -156,12 +160,11 @@ for my $scale_note ( 'E' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -190,6 +193,8 @@ for my $roman ( @romans ) {
     'Cb' => 'bV',
 );
 
+%values = ();
+
 for my $scale_note ( 'F' ) {
     diag "scale_note: $scale_note";
 
@@ -207,12 +212,11 @@ for my $scale_note ( 'F' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -229,7 +233,7 @@ for my $roman ( @romans ) {
     'E#' => 'bvii',
     'F'  => 'bvii',
     'F#' => 'vii',
-    'Gb' => 'bI',
+    'Gb' => 'vii',
     'G'  => 'I',
     'G#' => 'bii',
     'Ab' => 'bii',
@@ -240,6 +244,8 @@ for my $roman ( @romans ) {
     'B#' => '', # IV
     'Cb' => 'iii',
 );
+
+%values = ();
 
 for my $scale_note ( 'G' ) {
     diag "scale_note: $scale_note";
@@ -258,12 +264,11 @@ for my $scale_note ( 'G' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -271,7 +276,7 @@ for my $roman ( @romans ) {
 %expected = (
     'C'  => 'biii',
     'C#' => 'iii',
-    'Db' => 'bIV',
+    'Db' => 'iii',
     'D'  => 'IV',
     'D#' => 'bV',
     'Eb' => 'bV',
@@ -283,7 +288,7 @@ for my $roman ( @romans ) {
     'Gb' => '', # vi
     'G'  => 'bvii',
     'G#' => 'vii',
-    'Ab' => 'bI',
+    'Ab' => 'vii',
     'A'  => 'I',
     'A#' => 'bii',
     'Bb' => 'bii',
@@ -291,6 +296,8 @@ for my $roman ( @romans ) {
     'B#' => 'biii',
     'Cb' => 'ii',
 );
+
+%values = ();
 
 for my $scale_note ( 'A' ) {
     diag "scale_note: $scale_note";
@@ -309,12 +316,11 @@ for my $scale_note ( 'A' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }
 
-%values = ();
-@values{ grep { $_ } values %expected } = undef;
 for my $roman ( @romans ) {
     ok exists $values{$roman}, "$roman present";
 }
@@ -325,7 +331,7 @@ for my $roman ( @romans ) {
     'Db' => '', # ii
     'D'  => 'biii',
     'D#' => 'iii',
-    'Eb' => 'bIV',
+    'Eb' => 'iii',
     'E'  => 'IV',
     'Fb' => 'IV',
     'E#' => 'bV',
@@ -337,11 +343,13 @@ for my $roman ( @romans ) {
     'Ab' => '', # vi
     'A'  => 'bvii',
     'A#' => 'vii',
-    'Bb' => 'bI',
+    'Bb' => 'vii',
     'B'  => 'I',
     'B#' => 'bii',
     'Cb' => 'I',
 );
+
+%values = ();
 
 for my $scale_note ( 'B' ) {
     diag "scale_note: $scale_note";
@@ -360,6 +368,7 @@ for my $scale_note ( 'B' ) {
             my $roman = $mtr->parse($note);
             is $roman, $expected{$note}, "parsed $note => $roman"
                 if $expected{$note};
+            $values{$roman} = undef;
         }
     }
 }

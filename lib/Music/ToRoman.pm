@@ -242,11 +242,13 @@ sub parse {
 #        'D##' => 'E',
 #        'F##' => 'G',
 #        'G##' => 'A',
+#        'A##' => 'B',
 #    );
 #    for ( @notes ) {
-#        s/$_/$ss_enharmonics{$_}/
+#        $_ = $ss_enharmonics{$_}
 #            if $ss_enharmonics{$_};
 #    }
+#use Data::Dumper;warn(__PACKAGE__,' ',__LINE__," MARK: ",Dumper\@notes);
 
     # Convert a diminished chord
     $chord =~ s/dim/o/;
@@ -361,6 +363,10 @@ sub parse {
 
     # Append the remaining decorator to the roman representation
     $roman .= $decorator;
+
+    $roman =~ s/bI\b/vii/g;
+    $roman =~ s/bIV\b/iii/g;
+
     print "ROMAN 4: $roman\n" if $self->verbose;
 
     return $roman;

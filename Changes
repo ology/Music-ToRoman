@@ -1,6 +1,9 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Convert bI to vii and bIV to iii.
+
+0.1701 2019-09-09 14:57:50
     - Adjusted certain enharmonic sensing logic.
     - Add tests!
 
