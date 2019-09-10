@@ -284,11 +284,6 @@ sub parse {
     }
 
     my $accidental = '';
-    # If the note is not in the scale find the new position and accidental
-    if ( $position < 0 ) {
-        ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
-    }
-
     if ( $position < 0 && $note =~ /[#b]+$/ ) {
         my $n = Music::Note->new( $note, 'isobase' );
         my $name = $n->format('isobase');
@@ -297,6 +292,11 @@ sub parse {
         $note = $n->format('isobase');
         $position = first_index { $_ eq $note } @notes;
         $accidental = '';
+    }
+
+    # If the note is not in the scale find the new position and accidental
+    if ( $position < 0 ) {
+        ( $position, $accidental ) = _pos_acc( $note, $position, \@notes );
     }
 
     my $roman = $scale[$position];
