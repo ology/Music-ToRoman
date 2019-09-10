@@ -192,7 +192,7 @@ for my $roman ( @romans ) {
     'Bb' => '', # bV
     'B'  => '', # V
     'B#' => '', # bvi
-    'Cb' => 'V', # 
+    'Cb' => 'V',
 );
 
 %values = ();
