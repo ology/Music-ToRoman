@@ -150,7 +150,9 @@ has chords => (
 
 =head2 verbose
 
-Show the progress of the B<parse> method.  Default C<0>
+Show the progress of the B<parse> method.
+
+Default C<0>
 
 =cut
 
