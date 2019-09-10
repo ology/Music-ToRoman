@@ -11,7 +11,7 @@ use Test::More;
 
 use_ok 'Music::ToRoman';
 
-my @notes = qw/ C C# Db D D# Eb E Fb E# F F# Gb G G# Ab A A# Bb B B# Cb /;
+my @notes = qw/ C C# Db D D# Eb E Fb E# Fb F F# Gb G G# Ab A A# Bb B B# Cb /;
 
 my @romans = qw/ I bii ii biii iii IV bV V bvi vi bvii vii /;
 
