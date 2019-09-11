@@ -47,6 +47,7 @@ for my $scale_note ( @notes ) {
             is $roman_case, $mode_case, 'cases match';
         }
 
+        # Rotate mode
         push @modes, shift @modes;
 
         $j++;
