@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Test the modes
+# Test the natural modes
 
 use strict;
 use warnings;
