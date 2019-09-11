@@ -259,13 +259,13 @@ sub parse {
     ( my $note = $chord ) =~ s/^($note_re).*$/$1/;
 
     my %bb_enharmonics = (
-        Cbb => 'Bb', #[qw/ Bb A# /],
-        Dbb => 'C',  #[qw/ C B# /],
-        Ebb => 'D',  #[qw/ D /],
-        Fbb => 'Eb', #[qw/ Eb D# /],
-        Gbb => 'F',  #[qw/ F /],
-        Abb => 'G',  #[qw/ G /],
-        Bbb => 'A',  #[qw/ A /],
+        Cbb => 'Bb',
+        Dbb => 'C',
+        Ebb => 'D',
+        Fbb => 'Eb',
+        Gbb => 'F',
+        Abb => 'G',
+        Bbb => 'A',
     );
 
     $note = $bb_enharmonics{$note}
