@@ -40,9 +40,9 @@ for my $scale_note ( @notes ) {
         for my $note ( @notes ) {
             my $roman = $mtr->parse($note);
             my $mode = $modes[ $equiv{$roman} - 1 ];
-#            diag "\t\t$note => $roman ($mode)";
             my $roman_case = ( $roman =~ /^[A-Z]+$/ ) ? 'UPPER' : ( $roman =~ /^[a-z]+$/ ) ? 'lower' : '?';
             my $mode_case = ( $mode =~ /^[A-Z]+$/ ) ? 'UPPER' : ( $mode =~ /^[a-z]+$/ ) ? 'lower' : '?';
+#            diag "\t\t$note => $roman ($mode), case: $roman_case";
             isnt $roman_case, '?', 'known case';
             is $roman_case, $mode_case, 'cases match';
         }
