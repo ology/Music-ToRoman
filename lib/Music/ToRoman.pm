@@ -281,7 +281,7 @@ sub parse {
             if $note eq 'Fb';
         $position = first_index { $_ eq $note } @notes;
     }
-    elsif ( $note eq 'E#' ) {
+    elsif ( $note eq 'E#' ) { # XXX Why does this work?
         $note = 'F';
     }
 
