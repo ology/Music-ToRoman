@@ -211,7 +211,7 @@ sub parse {
     my $note_re = qr/[A-G][#b]?[#b]?/;
 
     # Get the roman representation of the scale
-    my @scale = $self->_get_scale_mode;
+    my @scale = $self->get_scale_mode;
     print "SCALE: @scale\n" if $self->verbose;
 
     my @notes;
@@ -374,7 +374,15 @@ sub parse {
     return $roman;
 }
 
-sub _get_scale_mode {
+=head2 get_scale_mode
+
+  @scale = $mtr->get_scale_mode;
+
+Return the Roman representation of the mode.
+
+=cut
+
+sub get_scale_mode {
     my ($self) = @_;
 
     my @scale = qw( I ii iii IV V vi vii ); # Default to major/ionian
