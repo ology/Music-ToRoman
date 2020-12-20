@@ -61,6 +61,8 @@ use namespace::clean;
   $roman = $mtr->parse('D7');     # IV7
   $roman = $mtr->parse('Em');     # v
 
+  my @mode = $mtr->get_scale_mode;
+
 =head1 DESCRIPTION
 
 C<Music::ToRoman> converts named chords to Roman numeral notation.
@@ -376,7 +378,7 @@ sub parse {
 
 =head2 get_scale_mode
 
-  @scale = $mtr->get_scale_mode;
+  @mode = $mtr->get_scale_mode;
 
 Return the Roman representation of the mode.
 
