@@ -2,6 +2,7 @@ Revision history for Music-ToRoman
 
 {{$NEXT}}
     - Make ->get_scale_mode a public method.
+    - Improve documentation.
 
 0.1703 2019-09-10 10:14:06
     - Fix a number of notes to romans by reordering enharmonic computation.
