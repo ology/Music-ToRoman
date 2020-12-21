@@ -1,6 +1,8 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+
+0.1800 2020-12-20 12:06:59
     - Make ->get_scale_mode a public method.
     - Improve documentation.
 
