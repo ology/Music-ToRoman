@@ -2,7 +2,7 @@ package Music::ToRoman;
 
 # ABSTRACT: Convert notes and chords to Roman numeral notation
 
-our $VERSION = '0.1800';
+our $VERSION = '0.1900';
 
 use List::MoreUtils qw/ any first_index /;
 use Moo;
@@ -62,6 +62,7 @@ use namespace::clean;
   $roman = $mtr->parse('Em');     # v
 
   my @mode = $mtr->get_scale_mode;
+  my @chords = $mtr->get_scale_chords;
 
 =head1 DESCRIPTION
 
@@ -409,6 +410,31 @@ sub get_scale_mode {
     }
 
     return @scale;
+}
+
+=head2 get_scale_chords
+
+  @mode = $mtr->get_scale_chords;
+
+Return the chords of the mode.
+
+=cut
+
+sub get_scale_chords {
+    my ($self) = @_;
+
+    my %diminished = ( 
+      ionian     => 'vii',
+      dorian     => 'vi',
+      phrygian   => 'v',
+      lydian     => 'iv',
+      mixolydian => 'iii',
+      aeolian    => 'ii',
+      locrian    => 'i',
+    );
+    my @chords = map { m/^$diminished{ $self->scale_name }$/ ? 'dim' : m/^[A-Z]+$/ ? '' : 'm' } $self->get_scale_mode;
+
+    return @chords;
 }
 
 sub _up_to_flat {
