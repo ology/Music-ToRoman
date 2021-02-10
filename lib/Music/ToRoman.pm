@@ -423,7 +423,7 @@ Return the chords of the mode.
 sub get_scale_chords {
     my ($self) = @_;
 
-    my %diminished = ( 
+    my %diminished = (
       ionian     => 'vii',
       dorian     => 'vi',
       phrygian   => 'v',
