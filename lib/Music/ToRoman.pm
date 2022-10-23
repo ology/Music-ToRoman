@@ -4,12 +4,11 @@ package Music::ToRoman;
 
 our $VERSION = '0.1900';
 
+use strictures 2;
 use List::MoreUtils qw/ any first_index /;
 use Moo;
-use Music::Note;
-use Music::Scales;
-
-use strictures 2;
+use Music::Note ();
+use Music::Scales qw(get_scale_notes);
 use namespace::clean;
 
 =encoding utf8

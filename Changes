@@ -1,6 +1,7 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Avoid implicit imports.
 
 0.1900 2021-02-10 15:14:26
     - Add the ->get_scale_chords convenience method.
