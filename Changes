@@ -1,6 +1,7 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Use List::SomeUtils, not MoreUtils.
 
 0.1901 2022-10-23 14:00:58
     - Avoid implicit imports.
