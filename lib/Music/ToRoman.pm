@@ -411,6 +411,47 @@ sub get_scale_mode {
     return @scale;
 }
 
+=head2 get_scale_nums
+
+  ($degree, $type) = $mtr->get_scale_nums($roman);
+
+Return the (arabic) scale degree number and C<major>, C<minor>,
+C<diminished> chord types, given the Roman representation of the mode
+degree.
+
+=cut
+
+sub get_scale_nums {
+    my ($self, $roman) = @_;
+    my $degree = 1; # Default to major/ionian
+    my $type = 'major';
+    if ( $roman =~ /^vii/i ) {
+        $degree = 7;
+    }
+    elsif ( $roman =~ /^vi/i ) {
+        $degree = 6;
+    }
+    elsif ( $roman =~ /^v/i ) {
+        $degree = 5;
+    }
+    elsif ( $roman =~ /^iv/i ) {
+        $degree = 4;
+    }
+    elsif ( $roman =~ /^iii/i ) {
+        $degree = 3;
+    }
+    elsif ( $roman =~ /^ii/i ) {
+        $degree = 2;
+    }
+    if ( $roman =~ /o/ ) {
+        $type = 'diminished';
+    }
+    elsif ( $roman =~ /^[ivo]+$/ ) {
+        $type = 'minor';
+    }
+    return $degree, $type;
+}
+
 =head2 get_scale_chords
 
   @mode = $mtr->get_scale_chords;
