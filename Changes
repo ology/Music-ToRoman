@@ -1,6 +1,7 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Fix get_scale_degree() regexp logic and documentation.
 
 0.2000 2024-11-29 22:56:54
     - Add the handy get_scale_degree() method.
