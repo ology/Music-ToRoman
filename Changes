@@ -1,7 +1,7 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
-    - Add the handy get_scale_nums() method.
+    - Add the handy get_scale_degree() method.
 
 0.1902 2022-12-12 06:01:36
     - Use List::SomeUtils, not MoreUtils.
