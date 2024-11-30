@@ -446,7 +446,7 @@ sub get_scale_degree {
     if ( $roman =~ /o$/ ) {
         $type = 'diminished';
     }
-    elsif ( $roman =~ /^[ivo]+$/ ) {
+    elsif ( $roman =~ /^[iv]+$/ ) {
         $type = 'minor';
     }
     return $degree, $type;
