@@ -411,7 +411,7 @@ sub get_scale_mode {
     return @scale;
 }
 
-=head2 get_scale_nums
+=head2 get_scale_degree
 
   ($degree, $type) = $mtr->get_scale_nums($roman);
 
@@ -421,7 +421,7 @@ degree.
 
 =cut
 
-sub get_scale_nums {
+sub get_scale_degree {
     my ($self, $roman) = @_;
     my $degree = 1; # Default to major/ionian
     my $type = 'major';
