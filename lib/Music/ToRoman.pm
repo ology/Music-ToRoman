@@ -415,7 +415,7 @@ sub get_scale_mode {
 
   ($degree, $type) = $mtr->get_scale_nums($roman);
 
-Return the (arabic) scale degree number and C<major>, C<minor>,
+Return the (Arabic) scale degree number and C<major>, C<minor>,
 C<diminished> chord types, given the Roman representation of the mode
 degree.
 
