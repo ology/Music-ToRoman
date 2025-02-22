@@ -1,6 +1,7 @@
 Revision history for Music-ToRoman
 
 {{$NEXT}}
+    - Add the missing major/minor keys to the diminished hash, in the ->get_scale_chords method.
 
 0.2001 2024-11-30 00:35:58
     - Fix get_scale_degree() regexp logic and documentation.
