@@ -464,11 +464,13 @@ sub get_scale_chords {
     my ($self) = @_;
 
     my %diminished = (
+      major      => 'vii',
       ionian     => 'vii',
       dorian     => 'vi',
       phrygian   => 'v',
       lydian     => 'iv',
       mixolydian => 'iii',
+      minor      => 'ii',
       aeolian    => 'ii',
       locrian    => 'i',
     );
